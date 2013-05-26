@@ -1,7 +1,6 @@
 TSW
 ===
 Projekt Pchelki
-===
 
 *zalozenia poczatkowe*
 
