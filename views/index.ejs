@@ -7,21 +7,31 @@
 	<link rel='stylesheet' href='/css/bootstrap.min.css' />
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<link rel='stylesheet' href='/css/bootstrap-responsive.css'>
+	<link rel='stylesheet' href='/css/style.css'>
+	<script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
+	<script type="text/javascript" src='/js/skrypty.js'></script>
 
   </head>
   
   <body>
   
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <form class="well form-inline">
-  	<input type="text" class="input-small" placeholder="Username">
-  	<input type="password" class="input-small" placeholder="Password">
-  	<button type="submit" class="btn btn-primary" id="Log_in">Log in</button>
-  	<button id="Register" class="btn">Register</button>
-    </form>
-<br />
-<div id="pchleki"></div>
+    <p>Czy chcesz zagrać w <%= title %> sam czy z innymi graczami?</p>
+
+	<br />
+	<div id="pchleki"></div>
+
+	<button type="button" id="sam1" class="btn" onclick="mySam()">Sam</button>
+	<button type="button" id="multi1" class="btn" onclick="myMulti()">Z innymi graczami</button>
+	<br />
+	<br />
+	<div id="sam"></div>
+	<div id="multi"></div>
+	
+
+
+	
+	
 	
   </body>
   
