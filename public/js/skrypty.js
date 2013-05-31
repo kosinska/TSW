@@ -1,12 +1,15 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-$('#gamefield').append('<p id="target" style="background-color:blue; width:25px; height:25px;"></p>');//w polu gamefild towrzy pchelke	
-var counter = 10; //licznik przeuwajacy pchelke
-$('#target').mouseup(function() {
-counter=counter+10;
-//alert(counter);
-$('#target').remove();
-$('#gamefield').append('<p id="target" style="background-color:blue; width:25px; height:25px; margin-top: ' + counter + 'px;"></p>');	
+var counter = 0;
+var pchelka = '<div id="target" class="target" style="background-color:red; width:20px; height:20px; border-radius: 50%; position: relative; "></div>';
+$('#gamefield').append(pchelka);
+$('#target').mousedown(function(){
+counter = 0;
+$('#target') = setInterval(function(){counter += 5;}, 1000);
+return false;
+});
+$("#target").mouseup(function(){
+$(".target").animate({"left": "+=" + counter + "px"}, "slow");
 });
 
 });
