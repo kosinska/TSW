@@ -1,18 +1,37 @@
 $(document).ready(function () {
 
-var counter = 0;
-var pchelka = '<div id="target" class="target" style="background-color:red; width:20px; height:20px; border-radius: 50%; position: relative; "></div>';
+//var licznik = 0;
+
+var pchelka = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla" class="pchla" style="background-color:#EE6363; width:22px; height:22px; border-radius: 50%; position: relative; -moz-box-shadow: 0 0 5px 5px #CD5555; -webkit-box-shadow: 0 0 5px 5px #CD5555; box-shadow: 0 0 5px 5px #CD5555;">pch</div>';
+
 $('#gamefield').append(pchelka);
-$('#target').mousedown(function(){
-counter = 0;
-$('#target') = setInterval(function(){counter += 5;}, 1000);
+
+/*$('#pchla').mousedown(function(){
+licznik = 0;
+$('#pchla') = setInterval(function(){licznik += 5;}, 1000);
 return false;
 });
-$("#target").mouseup(function(){
-$(".target").animate({"left": "+=" + counter + "px"}, "slow");
-});
+$("pchla").mouseup(function(){
+$("div").animate({left: 'left "+=" + licznik + "px"}, "slow");
+});*/
+
 
 });
+
+function mDown(){
+document.getElementById("pchla").style.backgroundColor="blue";
+document.getElementById("pchla").innerHTML="RM";
+//var licznik =0;
+//document.getElementById("pchla").setInterval(function(){licznik += 5;}, 1000);
+}
+
+function mUp(){
+document.getElementById("pchla").style.backgroundColor="red";
+document.getElementById("pchla").innerHTML="skacze";
+$('#pchla').animate({
+left:'50px'
+});
+}
 
 function mySam()
 {

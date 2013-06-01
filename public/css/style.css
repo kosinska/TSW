@@ -11,13 +11,13 @@ color: #8B795E;
 
 body{
 background-color: #FDF5E6;
-/*background: url('http://static.freepik.com/darmowe-zdjecie/kolorowe-bokeh-tło-wektor-wybuch_53-14601.jpg') no-repeat;*/
 background-size: cover;
 }
 
 div{
 margin-left: 5%;
 color: #8B795E;
+position: absolute;
 }
 
 button{
