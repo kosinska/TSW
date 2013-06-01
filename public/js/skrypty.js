@@ -25,12 +25,18 @@ document.getElementById("pchla").innerHTML="RM";
 //document.getElementById("pchla").setInterval(function(){licznik += 5;}, 1000);
 }
 
+var odleglosc=0;
 function mUp(){
+console.log(odleglosc);
+console.trace();
+odleglosc += 50;
+if(odleglosc >= 300) odleglosc = 300;
 document.getElementById("pchla").style.backgroundColor="red";
 document.getElementById("pchla").innerHTML="skacze";
 $('#pchla').animate({
-left:'50px'
+left: odleglosc + 'px'
 });
+
 }
 
 function mySam()
