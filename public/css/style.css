@@ -11,7 +11,7 @@ color: #8B795E;
 
 body{
 background-color: #FDF5E6;
-background-size: cover;
+/*background-size: cover;*/
 }
 
 div{
@@ -22,4 +22,38 @@ position: absolute;
 
 button{
 margin-left: 7%;
+}
+
+#gamefield{
+border: #8B7765 solid 2px;
+width:400px;
+height:400px;
+margin-left: 35%;
+-moz-box-shadow: 0 0 5px 5px #8B795E;
+-webkit-box-shadow: 0 0 5px 5px #8B795E;
+box-shadow: 0 0 5px 5px #8B795E;
+}
+
+#pchla{
+background-color:#EE6363;
+width:22px;
+height:22px;
+border-radius: 50%;
+position: relative;
+-moz-box-shadow: 0 0 5px 5px #CD5555;
+-webkit-box-shadow: 0 0 5px 5px #CD5555;
+box-shadow: 0 0 5px 5px #CD5555;
+}
+
+#pudlo{
+background-color:#FBDBAE;
+width:100px;
+height:100px;
+position: relative;
+margin-left:auto;
+margin-right:auto;
+top:130px;
+-moz-box-shadow: 0 0 2px 2px #FFCC99;
+-webkit-box-shadow: 0 0 2px 2px #FFCC99;
+box-shadow: 0 0 2px 2px #FFCC99;
 }

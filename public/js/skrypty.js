@@ -1,31 +1,20 @@
 $(document).ready(function () {
 
-//var licznik = 0;
-
-var pchelka = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla" class="pchla" style="background-color:#EE6363; width:22px; height:22px; border-radius: 50%; position: relative; -moz-box-shadow: 0 0 5px 5px #CD5555; -webkit-box-shadow: 0 0 5px 5px #CD5555; box-shadow: 0 0 5px 5px #CD5555;">pch</div>';
+var pchelka = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla" class="pchla">pch</div>';
+var pudelko = '<div id="pudlo" class="pudlo">pud</div>';
 
 $('#gamefield').append(pchelka);
-
-/*$('#pchla').mousedown(function(){
-licznik = 0;
-$('#pchla') = setInterval(function(){licznik += 5;}, 1000);
-return false;
-});
-$("pchla").mouseup(function(){
-$("div").animate({left: 'left "+=" + licznik + "px"}, "slow");
-});*/
-
+$('#gamefield').append(pudelko);
 
 });
 
 function mDown(){
 document.getElementById("pchla").style.backgroundColor="blue";
 document.getElementById("pchla").innerHTML="RM";
-//var licznik =0;
-//document.getElementById("pchla").setInterval(function(){licznik += 5;}, 1000);
 }
 
 var odleglosc=0;
+
 function mUp(){
 console.log(odleglosc);
 console.trace();
@@ -36,7 +25,6 @@ document.getElementById("pchla").innerHTML="skacze";
 $('#pchla').animate({
 left: odleglosc + 'px'
 });
-
 }
 
 function mySam()
