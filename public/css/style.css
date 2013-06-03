@@ -11,7 +11,7 @@ color: #8B795E;
 
 body{
 background-color: #FDF5E6;
-/*background-size: cover;*/
+background-size: cover;
 }
 
 div{
@@ -26,15 +26,17 @@ margin-left: 7%;
 
 #gamefield{
 border: #8B7765 solid 2px;
+background: url('/img/tlo.jpg');
+background-size: cover;
 width:400px;
 height:400px;
-/*margin-left: 35%;*/
 -moz-box-shadow: 0 0 5px 5px #8B795E;
 -webkit-box-shadow: 0 0 5px 5px #8B795E;
 box-shadow: 0 0 5px 5px #8B795E;
 }
 
 #pole_gry{
+
 width:500px;
 height:500px;
 margin-left: 32%;
@@ -80,15 +82,15 @@ position: relative;
 box-shadow: 0 0 5px 5px #CD5555;
 }
 
-#pudlo{
+/*#pudlo{
 background-color:#FBDBAE;
 width:100px;
 height:100px;
 position: relative;
-margin-left:auto;
-margin-right:auto;
-/*top:130px;*/
+margin-left:150px;
+margin-right:150px;
+top:150px;
 -moz-box-shadow: 0 0 2px 2px #FFCC99;
 -webkit-box-shadow: 0 0 2px 2px #FFCC99;
 box-shadow: 0 0 2px 2px #FFCC99;
-}
+}*/
