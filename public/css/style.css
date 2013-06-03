@@ -28,13 +28,47 @@ margin-left: 7%;
 border: #8B7765 solid 2px;
 width:400px;
 height:400px;
-margin-left: 35%;
+/*margin-left: 35%;*/
 -moz-box-shadow: 0 0 5px 5px #8B795E;
 -webkit-box-shadow: 0 0 5px 5px #8B795E;
 box-shadow: 0 0 5px 5px #8B795E;
 }
 
-.pchla{
+#pole_gry{
+width:500px;
+height:500px;
+margin-left: 32%;
+
+}
+
+#pchla5, #pchla3, #pchla6{
+display: inline;
+background-color:#EE6363;
+width:22px;
+height:22px;
+border-radius: 50%;
+margin-left: 0px;
+position: relative;
+-moz-box-shadow: 0 0 5px 5px #CD5555;
+-webkit-box-shadow: 0 0 5px 5px #CD5555;
+box-shadow: 0 0 5px 5px #CD5555;
+}
+
+#pchla1, #pchla9, #pchla2{
+display: inline;
+background-color:#EE6363;
+width:22px;
+height:22px;
+border-radius: 50%;
+margin-left: 0px;
+position: relative;
+-moz-box-shadow: 0 0 5px 5px #CD5555;
+-webkit-box-shadow: 0 0 5px 5px #CD5555;
+box-shadow: 0 0 5px 5px #CD5555;
+}
+
+#pchla7, #pchla4, #pchla8{
+display: inline;
 background-color:#EE6363;
 width:22px;
 height:22px;
