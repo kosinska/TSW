@@ -4,39 +4,42 @@ $(document).ready(function () {
 
 });
 
-var pchelka1 = '<div onmousedown="mDown()" onmouseup='+'mHor("right",0)'+ ' id="pchla1" class="pchla">pch</div>';
-var pchelka2 = '<div onmousedown="mDown()" onmouseup='+'mHor("left",0)' + ' id="pchla2" class="pchla">pch</div>';
-var pchelka3 = '<div onmousedown="mDown()" onmouseup='+'mVer("down",0)'+ ' id="pchla3" class="pchla">pch</div>';
-var pchelka4 = '<div onmousedown="mDown()" onmouseup='+'mVer("up",0)'+ ' id="pchla4" class="pchla">pch</div>';
-var pchelka5 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla5" class="pchla">pch</div>';
-var pchelka6 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla6" class="pchla">pch</div>';
-var pchelka7 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla7" class="pchla">pch</div>';
-var pchelka8 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla8" class="pchla">pch</div>';
-var pchelka9 = '<div id="pchla9" class="pchla">pch</div>';
+var pchelka1 = '<div onmousedown="mDown()" onmouseup='+'mHor("right",0)'+ ' id="pchla1" class="pchla">pci</div>';
+var pchelka2 = '<div onmousedown="mDown()" onmouseup='+'mHor("left",0)' + ' id="pchla2" class="pchla">pci</div>';
+var pchelka3 = '<div onmousedown="mDown()" onmouseup='+'mVer("down",0)'+ ' id="pchla3" class="pchla">pci</div>';
+var pchelka4 = '<div onmousedown="mDown()" onmouseup='+'mVer("up",0)'+ ' id="pchla4" class="pchla">pci</div>';
+var pchelka5 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla5" class="pchla">pci</div>';
+var pchelka6 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla6" class="pchla">pci</div>';
+var pchelka7 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla7" class="pchla">pci</div>';
+var pchelka8 = '<div onmousedown="mDown()" onmouseup="mUp()" id="pchla8" class="pchla">pci</div>';
+var pchelka9 = '<div id="pchla9" class="pchla">pci</div>';
 
 
 //var pudelko = '<div id="pudlo" class="pudlo"></div>';
 
 
 function mDown(){
-document.getElementById("pchla1").style.backgroundColor="blue";
-document.getElementById("pchla1").innerHTML="RM";
-document.getElementById("pchla2").style.backgroundColor="yello";
-document.getElementById("pchla2").innerHTML="RM";
-document.getElementById("pchla3").style.backgroundColor="blue";
-document.getElementById("pchla3").innerHTML="RM";
-document.getElementById("pchla4").style.backgroundColor="green";
-document.getElementById("pchla4").innerHTML="RM";
-document.getElementById("pchla5").style.backgroundColor="white";
-document.getElementById("pchla5").innerHTML="RM";
-document.getElementById("pchla6").style.backgroundColor="black";
-document.getElementById("pchla6").innerHTML="RM";
-document.getElementById("pchla7").style.backgroundColor="brown";
-document.getElementById("pchla7").innerHTML="RM";
-document.getElementById("pchla8").style.backgroundColor="pink";
-document.getElementById("pchla8").innerHTML="RM";
-document.getElementById("pchla9").style.backgroundColor="cyan";
-document.getElementById("pchla9").innerHTML="RM";
+
+document.getElementById("pchla1").style.backgroundColor="#e93535";
+document.getElementById("pchla2").style.backgroundColor="#e93535";
+document.getElementById("pchla3").style.backgroundColor="#e93535";
+document.getElementById("pchla4").style.backgroundColor="#e93535";
+document.getElementById("pchla5").style.backgroundColor="#e93535";
+document.getElementById("pchla6").style.backgroundColor="#e93535";
+document.getElementById("pchla7").style.backgroundColor="#e93535";
+document.getElementById("pchla8").style.backgroundColor="#e93535";
+document.getElementById("pchla9").style.backgroundColor="#e93535";
+
+document.getElementById("pchla1").style.color="#e93535";
+document.getElementById("pchla2").style.color="#e93535";
+document.getElementById("pchla3").style.color="#e93535";
+document.getElementById("pchla4").style.color="#e93535";
+document.getElementById("pchla5").style.color="#e93535";
+document.getElementById("pchla6").style.color="#e93535";
+document.getElementById("pchla7").style.color="#e93535";
+document.getElementById("pchla8").style.color="#e93535";
+document.getElementById("pchla9").style.color="#e93535";
+
 
 }
 
@@ -55,57 +58,58 @@ console.log("Kierunek: "+dir);
 console.trace();
 if(dir==="right"){
 	dX[n] += 50;
-	if(dX[n] >= 380) dX[n] = 380;
+	if(dX[n] >= 340) dX[n] = 340;
 } else if (dir==="left"){
 	dX[n] -= 50;
 	if(dX[n] <0) dX[n] = 0;
 }
 
-document.getElementById("pchla1").style.backgroundColor="red";
-document.getElementById("pchla1").innerHTML="skL";
+document.getElementById("pchla1").style.backgroundColor="#EE6363";
 $('#pchla1').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla2").style.backgroundColor="red";
-document.getElementById("pchla2").innerHTML="skR";
+document.getElementById("pchla2").style.backgroundColor="#EE6363";
 $('#pchla2').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla3").style.backgroundColor="red";
-document.getElementById("pchla3").innerHTML="skT";
+document.getElementById("pchla3").style.backgroundColor="#EE6363";
 $('#pchla3').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla4").style.backgroundColor="red";
-document.getElementById("pchla4").innerHTML="skD";
+document.getElementById("pchla4").style.backgroundColor="#EE6363";
 $('#pchla4').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla5").style.backgroundColor="red";
-document.getElementById("pchla5").innerHTML="sk";
+document.getElementById("pchla5").style.backgroundColor="#EE6363";
 $('#pchla5').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla6").style.backgroundColor="red";
-document.getElementById("pchla6").innerHTML="sk";
+document.getElementById("pchla6").style.backgroundColor="#EE6363";
 $('#pchla6').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla7").style.backgroundColor="red";
-document.getElementById("pchla7").innerHTML="sk";
+document.getElementById("pchla7").style.backgroundColor="#EE6363";
 $('#pchla7').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla8").style.backgroundColor="red";
-document.getElementById("pchla8").innerHTML="sk";
+document.getElementById("pchla8").style.backgroundColor="#EE6363";
 $('#pchla8').animate({
 left: dX[n] + 'px'
 });
-document.getElementById("pchla9").style.backgroundColor="red";
-document.getElementById("pchla9").innerHTML="sk";
+document.getElementById("pchla9").style.backgroundColor="#EE6363";
 $('#pchla9').animate({
 left: dX[n] + 'px'
 });
+
+document.getElementById("pchla1").style.color="#EE6363";
+document.getElementById("pchla2").style.color="#EE6363";
+document.getElementById("pchla3").style.color="#EE6363";
+document.getElementById("pchla4").style.color="#EE6363";
+document.getElementById("pchla5").style.color="#EE6363";
+document.getElementById("pchla6").style.color="#EE6363";
+document.getElementById("pchla7").style.color="#EE6363";
+document.getElementById("pchla8").style.color="#EE6363";
+document.getElementById("pchla9").style.color="#EE6363";
 
 }
 
@@ -114,57 +118,58 @@ console.log(dY[n]);
 console.trace();
 if(dir==="down"){
 	dY[n] += 50;
-	if(dY[n] >= 380) dY[n] = 380;
+	if(dY[n] >= 340) dY[n] = 340;
 } else if (dir==="up"){
 	dY[n] -= 50;
 	if(dY[n] <0) dY[n] = 0;
 }
 
-document.getElementById("pchla1").style.backgroundColor="red";
-document.getElementById("pchla1").innerHTML="skL";
+document.getElementById("pchla1").style.backgroundColor="#EE6363";
 $('#pchla1').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla2").style.backgroundColor="red";
-document.getElementById("pchla2").innerHTML="skR";
+document.getElementById("pchla2").style.backgroundColor="#EE6363";
 $('#pchla2').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla3").style.backgroundColor="red";
-document.getElementById("pchla3").innerHTML="skT";
+document.getElementById("pchla3").style.backgroundColor="#EE6363";
 $('#pchla3').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla4").style.backgroundColor="red";
-document.getElementById("pchla4").innerHTML="skD";
+document.getElementById("pchla4").style.backgroundColor="#EE6363";
 $('#pchla4').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla5").style.backgroundColor="red";
-document.getElementById("pchla5").innerHTML="sk";
+document.getElementById("pchla5").style.backgroundColor="#EE6363";
 $('#pchla5').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla6").style.backgroundColor="red";
-document.getElementById("pchla6").innerHTML="sk";
+document.getElementById("pchla6").style.backgroundColor="#EE6363";
 $('#pchla6').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla7").style.backgroundColor="red";
-document.getElementById("pchla7").innerHTML="sk";
+document.getElementById("pchla7").style.backgroundColor="#EE6363";
 $('#pchla7').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla8").style.backgroundColor="red";
-document.getElementById("pchla8").innerHTML="sk";
+document.getElementById("pchla8").style.backgroundColor="#EE6363";
 $('#pchla8').animate({
 top: dY[n] + 'px'
 });
-document.getElementById("pchla9").style.backgroundColor="red";
-document.getElementById("pchla9").innerHTML="sk";
+document.getElementById("pchla9").style.backgroundColor="#EE6363";
 $('#pchla9').animate({
 top: dY[n] + 'px'
 });
+
+document.getElementById("pchla1").style.color="#EE6363";
+document.getElementById("pchla2").style.color="#EE6363";
+document.getElementById("pchla3").style.color="#EE6363";
+document.getElementById("pchla4").style.color="#EE6363";
+document.getElementById("pchla5").style.color="#EE6363";
+document.getElementById("pchla6").style.color="#EE6363";
+document.getElementById("pchla7").style.color="#EE6363";
+document.getElementById("pchla8").style.color="#EE6363";
+document.getElementById("pchla9").style.color="#EE6363";
 
 }
 
