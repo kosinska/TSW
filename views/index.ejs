@@ -10,10 +10,15 @@
 	<link rel='stylesheet' href='/css/style.css'>
 	<script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
 	<script type="text/javascript" src='/js/skrypty.js'></script>
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<script>
+	var socket=io.connect(window.location.hostname);
+	</script>
 
   </head>
   
-  <body>
+  <body id="body">
   
     <h1><%= title %></h1>
     <p>Czy chcesz zagrać w <%= title %> sam czy z innymi graczami?</p>
@@ -25,6 +30,8 @@
 	<button type="button" id="multi1" class="btn" onclick="wielu_graczy()">Z innymi graczami</button>
 	<br />
 	<br />
+	
+	<div id="zegar"></div>
 	
 	<div id="sam"></div>
 	<div id="multi"></div>

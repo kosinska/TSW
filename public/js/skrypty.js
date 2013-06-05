@@ -3,9 +3,8 @@ $(document).ready(function () {
 });
 
 
-var kolory_powrot=['#EE6363','#CAE1FF','yellow','white','green'];
-
-var kolory_klik=['#e93535','#B0C4DE','grey','grey','grey'];
+//var kolory_powrot=['#EE6363','#CAE1FF','yellow','white','green'];
+//var kolory_klik=['#e93535','#B0C4DE','grey','grey','grey'];
 
 var pchly=new Array(5);
 
@@ -41,7 +40,7 @@ var licznik_pkt=0;
 
 var licznik = new odliczanie({  
     sekundy: 40,
-    onUpdateStatus: function(sec){console.log(sec);},
+    onUpdateStatus: function(sec){console.log(sec);}, //$('#zegar').append("<p>Czas: "+sec + "</p>");$('#zegar').children().remove()
     onCounterEnd: function(){if(licznik_pkt != 5){ alert('Czas się skończył! Przegrałeś :(');
 							window.location.href='/';}}
 });
@@ -56,11 +55,19 @@ function odliczanie(options) {
 
   function zmiejszLicznik() {
     updateStatus(sekundy);
+   
+    if (sekundy <=5 ) $('#body').css( "background-color", "#FF6A6A")
+    if (sekundy <=4 ) $('#body').css( "background-color", "#FDF5E6")
+    if (sekundy <=3 ) $('#body').css( "background-color", "#FF6A6A")
+    if (sekundy <=2 ) $('#body').css( "background-color", "#FDF5E6")
+    if (sekundy <=1 ) $('#body').css( "background-color", "#FF6A6A")
     if (sekundy === 0) {
       counterEnd();
       instance.stop();
     }
     sekundy--;
+     
+   
   }
 
   this.start = function () {
@@ -78,9 +85,9 @@ function odliczanie(options) {
 ///////////////////////////////// klikniecie myszy
 function myszDol(){
 
-	for(i=0;i<9;i++){
-		$('#pchla'+n+i).css('backgroundColor', kolory_klik[n])
-	}
+	/*for(i=0;i<9;i++){
+		$('#pchla'+n+i).css( 'background-color', "grey") //kolory_klik[n]
+	}*/
 	
 }
 
@@ -140,7 +147,7 @@ function rPoz(dir,n){
 		}
 
 	for(i=0;i<9;i++){
-		$('#pchla'+n+i).css('background-color', kolory_powrot[n])
+		//$('#pchla'+n+i).css('background-color', kolory_powrot[n])
 		$('#pchla'+n+i).animate({
 		left: dX[n] + 'px'
 		});
@@ -207,7 +214,7 @@ function rPion(dir,n){
 
 
 	for(i=0;i<9;i++){
-		$('#pchla'+n+i).css('background-color', kolory_powrot[n])
+		//$('#pchla'+n+i).css('background-color', kolory_powrot[n])
 		$('#pchla'+n+i).animate({
 		top: dY[n] + 'px'
 		});
@@ -300,6 +307,21 @@ function wielu_graczy(){
 	document.getElementById("multi").innerHTML="Grasz z innymi graczami... Pierwszy wygrywa";
 	this.disabled=false;document.getElementById("sam1").disabled=true;
 	this.disabled=false;document.getElementById("multi1").disabled=true;
+
+$('#pole_gry').append('<div id ="gamefield"></div>');
+
+	$('#gamefield').append(pchly[0][4]);
+	$('#gamefield').append(pchly[0][2]);
+	$('#gamefield').append(pchly[0][5] + '<br / >');
+
+	$('#gamefield').append(pchly[0][0]);
+	$('#gamefield').append(pchly[0][8]);
+	$('#gamefield').append(pchly[0][1] + '<br / >');
+
+	$('#gamefield').append(pchly[0][6]);
+	$('#gamefield').append(pchly[0][3]);
+	$('#gamefield').append(pchly[0][7] + '<br / >');
+	pozycjaLosowa(0);
 
 }
 

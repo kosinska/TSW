@@ -30,6 +30,34 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+var io=require('socket.io');
+var socket=io.listen(server);
+
+function init(){
+	var players = [];
+	
+	socket.configure(function(){
+		socket.set("transport", ["websocket"]);
+		socket.set("log level", 2);
+	});
+	
+	setEventHandlers();
+};
+init();
+
+var setEventHandlers = function(){
+	socket.sockets.on("connection", onSocketConnection);
+};
+
+function onSocketConnection(client) {
+    util.log("New player has connected: "+client.id);
+    client.on("disconnect", onClientDisconnect);
+    client.on("new player", onNewPlayer);
+    client.on("move player", onMovePlayer);
+};
+
