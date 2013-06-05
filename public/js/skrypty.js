@@ -2,21 +2,10 @@ $(document).ready(function () {
 
 });
 
-/*
-var pchelka1 = '<div onmousedown="myszDol()" onmouseup='+'rPoz("right",0)'+ ' id="pchla1" class="pchla"></div>';
-var pchelka2 = '<div onmousedown="myszDol()" onmouseup='+'rPoz("left",0)' + ' id="pchla2" class="pchla"></div>';
-var pchelka3 = '<div onmousedown="myszDol()" onmouseup='+'rPion("down",0)'+ ' id="pchla3" class="pchla"></div>';
-var pchelka4 = '<div onmousedown="myszDol()" onmouseup='+'rPion("up",0)'+ ' id="pchla4" class="pchla"></div>';
-var pchelka5 = '<div onmousedown="myszDol()" id="pchla5" name="pchla" class="pchla"></div>';
-var pchelka6 = '<div onmousedown="myszDol()" id="pchla6" name="pchla" class="pchla"></div>';
-var pchelka7 = '<div onmousedown="myszDol()" id="pchla7" name="pchla" class="pchla"></div>';
-var pchelka8 = '<div onmousedown="myszDol()" id="pchla8" name="pchla" class="pchla"></div>';
-var pchelka9 = '<div id="pchla9" name="pchla" class="pchla"></div>';
-*/
 
-var kolory_powrot=['#EE6363','#CAE1FF','yello','orange','green'];
+var kolory_powrot=['#EE6363','#CAE1FF','yellow','white','green'];
 
-var kolory_klik=['#e93535','#B0C4DE','gray','gray','gray'];
+var kolory_klik=['#e93535','#B0C4DE','grey','grey','grey'];
 
 var pchly=new Array(5);
 
@@ -27,10 +16,9 @@ for(i=0; i<5;i++){
 }
 
 ///////////////////////////////// tablica pchel skladowych
-for(j=0;j<2;j++){
+for(j=0;j<5;j++){
 	for(k=0;k<9;k++){
 		if(k<2){
-	console.log('k: '+k+' j:'+ j);
 			pchly[j][k]='<div onmousedown="myszDol()" onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else if(k<4){
 			pchly[j][k]='<div onmousedown="myszDol()" onmouseup='+'rPion('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
@@ -52,9 +40,9 @@ var dY=new Array();
 var licznik_pkt=0;
 
 var licznik = new odliczanie({  
-    sekundy: 15,
+    sekundy: 40,
     onUpdateStatus: function(sec){console.log(sec);},
-    onCounterEnd: function(){if(licznik_pkt != 2){ alert('Czas się skończył! Przegrałeś :(');
+    onCounterEnd: function(){if(licznik_pkt != 5){ alert('Czas się skończył! Przegrałeś :(');
 							window.location.href='/';}}
 });
 
@@ -91,16 +79,13 @@ function odliczanie(options) {
 function myszDol(){
 
 	for(i=0;i<9;i++){
-		$('#pchla'+n+i).css('backgound-color', kolory_klik[n])
+		$('#pchla'+n+i).css('backgroundColor', kolory_klik[n])
 	}
 	
 }
 
 ///////////////////////////////// odklikniecie myszy z lewej/prawej
 function rPoz(dir,n){
-
-	console.log('n: '+n+' dx: '+dX + ' dir: '+ dir);
-	//console.trace();
 	
 		if(dir===0){
 			dX[n] += 50;
@@ -109,14 +94,20 @@ function rPoz(dir,n){
 				if( dX[n] >= 150 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
 				if( dX[n] >= 150 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 						
-				if(licznik_pkt == 2){
+				if(licznik_pkt == 5){
 					$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -129,14 +120,19 @@ function rPoz(dir,n){
 				if( dX[n] <= 200 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
 				if( dX[n] <= 200 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
-					if(n==1)$('.pchla'+n).remove();
+					if(n==1)$('.pchla'+n).remove();if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 2){
+				if(licznik_pkt == 5){
 					$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -144,7 +140,7 @@ function rPoz(dir,n){
 		}
 
 	for(i=0;i<9;i++){
-		$('#pchla'+n+i).css('backgound-color', kolory_powrot[n])
+		$('#pchla'+n+i).css('background-color', kolory_powrot[n])
 		$('#pchla'+n+i).animate({
 		left: dX[n] + 'px'
 		});
@@ -156,9 +152,6 @@ function rPoz(dir,n){
 ///////////////////////////////// odklikniecie myszy z gory/dolu
 function rPion(dir,n){
 
-	console.log(n);
-	console.log(dY);
-	console.trace();
 		if(dir===2){
 			dY[n] += 50;
 				if(dY[n] >= 340) dY[n] = 340;
@@ -166,14 +159,20 @@ function rPion(dir,n){
 				if( dX[n] == 150 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
 				if( dX[n] == 200 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 2){
+				if(licznik_pkt == 5){
 				$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -186,14 +185,20 @@ function rPion(dir,n){
 				if( dX[n] == 150 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
 				if( dX[n] == 200 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
+					if(n==2)$('.pchla'+n).remove();
+					if(n==3)$('.pchla'+n).remove();
+					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 2){
+				if(licznik_pkt == 5){
 				$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -202,7 +207,7 @@ function rPion(dir,n){
 
 
 	for(i=0;i<9;i++){
-		$('#pchla'+n+i).css('backgound-color', kolory_powrot[n])
+		$('#pchla'+n+i).css('background-color', kolory_powrot[n])
 		$('#pchla'+n+i).animate({
 		top: dY[n] + 'px'
 		});
@@ -214,7 +219,7 @@ function rPion(dir,n){
 ///////////////////////////////// klikniecie przycisku sam
 function sam(){
 
-	document.getElementById("sam").innerHTML="Grasz sam^^ masz 60sek";
+	document.getElementById("sam").innerHTML="Grasz sam^^ masz 40sek";
 	licznik.start();
 
 	this.disabled=false;document.getElementById("multi1").disabled=true;
@@ -248,11 +253,44 @@ function sam(){
 	$('#gamefield').append(pchly[1][7] + '<br / >');
 	pozycjaLosowa(1);
 	
+	$('#gamefield').append(pchly[2][4]);
+	$('#gamefield').append(pchly[2][2]);
+	$('#gamefield').append(pchly[2][5] + '<br / >');
+
+	$('#gamefield').append(pchly[2][0]);
+	$('#gamefield').append(pchly[2][8]);
+	$('#gamefield').append(pchly[2][1] + '<br / >');
+
+	$('#gamefield').append(pchly[2][6]);
+	$('#gamefield').append(pchly[2][3]);
+	$('#gamefield').append(pchly[2][7] + '<br / >');
+	pozycjaLosowa(2);
 	
-	
-	/*pozycjaLosowa(2);
+	$('#gamefield').append(pchly[3][4]);
+	$('#gamefield').append(pchly[3][2]);
+	$('#gamefield').append(pchly[3][5] + '<br / >');
+
+	$('#gamefield').append(pchly[3][0]);
+	$('#gamefield').append(pchly[3][8]);
+	$('#gamefield').append(pchly[3][1] + '<br / >');
+
+	$('#gamefield').append(pchly[3][6]);
+	$('#gamefield').append(pchly[3][3]);
+	$('#gamefield').append(pchly[3][7] + '<br / >');
 	pozycjaLosowa(3);
-	pozycjaLosowa(4);*/
+	
+	$('#gamefield').append(pchly[4][4]);
+	$('#gamefield').append(pchly[4][2]);
+	$('#gamefield').append(pchly[4][5] + '<br / >');
+
+	$('#gamefield').append(pchly[4][0]);
+	$('#gamefield').append(pchly[4][8]);
+	$('#gamefield').append(pchly[4][1] + '<br / >');
+
+	$('#gamefield').append(pchly[4][6]);
+	$('#gamefield').append(pchly[4][3]);
+	$('#gamefield').append(pchly[4][7] + '<br / >');
+	pozycjaLosowa(4);
 
 }
 
@@ -271,8 +309,11 @@ function pozycjaLosowa(n){
 	var rN=Math.floor(Math.random()*350);
 	var pos=Math.floor(rN/50)*50;
 	var pos1=Math.floor(rN/50)*50;
+
 	
 	//wyklucz pos pudelka
+	if(pos >= 150 && pos <= 200) pos +=100;
+	if(pos1 >= 150 && pos <= 200) pos1 +=100;
 	
 	ustawPozycje(n,pos1,pos);
 	dX[n]=pos1;
