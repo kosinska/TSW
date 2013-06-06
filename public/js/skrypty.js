@@ -3,11 +3,9 @@ $(document).ready(function () {
 
 });
 
+
 var pozycja =0;
 var pozycja2 =0;
-
-//var kolory_powrot=['#EE6363','#CAE1FF','yellow','white','green'];
-//var kolory_klik=['#e93535','#B0C4DE','grey','grey','grey'];
 
 var pchly=new Array(5);
 
@@ -17,15 +15,16 @@ for(i=0; i<5;i++){
 	pchly[i]=new Array(9);
 }
 
+
 ///////////////////////////////// tablica pchel skladowych
 for(j=0;j<5;j++){
 	for(k=0;k<9;k++){
 		if(k<2){
-			pchly[j][k]='<div onmousedown="myszDol()" onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
+			pchly[j][k]= '<div onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else if(k<4){
-			pchly[j][k]='<div onmousedown="myszDol()" onmouseup='+'rPion('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
+			pchly[j][k]= '<div onmouseup='+'rPion('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else if(k<8){
-			pchly[j][k]= '<div onmousedown="myszDol()" id="pchla'+j+k+'" class="pchla'+j+'"></div>';
+			pchly[j][k]= '<div id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else {
 			pchly[j][k]= '<div id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}	
@@ -90,14 +89,6 @@ function odliczanie(options) {
   };
 }
 
-///////////////////////////////// klikniecie myszy
-function myszDol(){
-
-	/*for(i=0;i<9;i++){
-		$('#pchla'+n+i).css( 'background-color', "grey") //kolory_klik[n]
-	}*/
-	
-}
 
 ///////////////////////////////// odklikniecie myszy z lewej/prawej
 function rPoz(dir,n){
@@ -126,7 +117,8 @@ function rPoz(dir,n){
 					$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
-				} 
+				}
+				
 		}
 		else if (dir===1){
 			dX[n] -= 50;
@@ -152,6 +144,7 @@ function rPoz(dir,n){
 					alert("Wygrales!");
 					window.location.href='/';
 				}
+				
 		}
 
 	for(i=0;i<9;i++){
@@ -192,6 +185,7 @@ function rPion(dir,n){
 					alert("Wygrales!");
 					window.location.href='/';
 				}
+				
 		}
 		else if (dir===3){
 			dY[n] -= 50;
@@ -212,12 +206,13 @@ function rPion(dir,n){
 					if(n==3)$('.pchla'+n).remove();
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
-					
+				
 				if(licznik_pkt == 5){
 				$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
 				}
+				
 		}
 
 
@@ -313,8 +308,10 @@ function sam(){
 function wielu_graczy(){
 
 	document.getElementById("multi").innerHTML="Grasz z innymi graczami... Pierwszy wygrywa";
+	
 	this.disabled=false;document.getElementById("sam1").disabled=true;
 	this.disabled=false;document.getElementById("multi1").disabled=true;
+	
 
 $('#pole_gry').append('<div id ="gamefield"></div>');
 
@@ -332,10 +329,13 @@ $('#pole_gry').append('<div id ="gamefield"></div>');
 	pozycjaLosowa(0);
 	
 	
-	
 	var socket=io.connect(window.location.hostname);
+	
+	socket.on('p',function(){
+		alert('przegrales');
+	});
 		
-	socket.on('connection',function(socket){
+	/*socket.on('connection',function(socket){
 		socket.emit('wyslijpozycje',{ pos: '1', pos1: '2'});
 		
 		console.log(pos,pos1);
@@ -344,7 +344,7 @@ $('#pole_gry').append('<div id ="gamefield"></div>');
 			socket.emit('wyslijpozycje',{ pos: '1', pos1: '2'});
 		});
 		
-    });
+    });*/
 	
 
 }
@@ -377,3 +377,4 @@ function ustawPozycje(n,x,y){
 	}
 
 }
+

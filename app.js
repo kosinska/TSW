@@ -43,6 +43,7 @@ var i=0;
 var uzytkownicy = new Array();
 
     socket.on('connection', function (client) {
+    
     	i++;
         console.log('Dolaczyl gracz: '+i);
         uzytkownicy[uzytkownicy.length]=client;
@@ -61,6 +62,11 @@ var uzytkownicy = new Array();
     	for(i=0; i<uzytkownicy.length; i++){
         	console.log('uzytkownik: '+uzytkownicy[i].id);
         }
+
+client.on('przegrana',function(){
+    		
+    		client.broadcast.emit('p');
+    	});
 
     
     });
