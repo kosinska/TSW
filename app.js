@@ -38,16 +38,6 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io=require('socket.io');
 var socket=io.listen(server);
 
-'use strict';
-    var username;
-
-    client.on('polozenie', function (msg) {
-        if (!username) {
-            username = msg;
-            client.send();
-            client.broadcast.emit('message', 'Nowy użytkownik: ' + username);
-            return;
-        }
-        client.broadcast.emit('message', username + ': ' + msg);
+    socket.on('connection', function () {
+        console.log('Dolaczyl gracz');
     });
-});

@@ -41,9 +41,14 @@ var dY=new Array();
 
 var licznik_pkt=0;
 
+$(document).ready(function() {
+  $('body').append('<div id="zegarek"></div>');
+});
+
+
 var licznik = new odliczanie({  
     sekundy: 40,
-    onUpdateStatus: function(sec){console.log(sec);}, //$('#zegar').append("<p>Czas: "+sec + "</p>");$('#zegar').children().remove()
+    onUpdateStatus: function(sec){console.log(sec); $('#zegarek').html("<p>Czas: "+sec + "</p>");}, //$('#zegar').children().remove();
     onCounterEnd: function(){if(licznik_pkt != 5){ alert('Czas się skończył! Przegrałeś :(');
 							window.location.href='/';}}
 });
@@ -330,18 +335,8 @@ $('#pole_gry').append('<div id ="gamefield"></div>');
 	
 	var socket=io.connect(window.location.hostname);
 		
-		entry_el = $('#entry');
-
-    	console.log('connecting…');
-
-    	socket.on('connect', function () {
-        	console.log('Połączony! '+ pozycja1 + ' ' + pozycja2);
-    	});
-
-    socket.on('message', function (msg) {
-        var data = msg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        $('#log ul').append('<li>' + data + '</li>');
-        entry_el.focus();
+		socket.on('connection',function(){
+		
     });
 	
 
