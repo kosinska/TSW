@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
+
 });
 
+var pozycja =0;
+var pozycja2 =0;
 
 //var kolory_powrot=['#EE6363','#CAE1FF','yellow','white','green'];
 //var kolory_klik=['#e93535','#B0C4DE','grey','grey','grey'];
@@ -322,6 +325,25 @@ $('#pole_gry').append('<div id ="gamefield"></div>');
 	$('#gamefield').append(pchly[0][3]);
 	$('#gamefield').append(pchly[0][7] + '<br / >');
 	pozycjaLosowa(0);
+	
+	
+	
+	var socket=io.connect(window.location.hostname);
+		
+		entry_el = $('#entry');
+
+    	console.log('connecting…');
+
+    	socket.on('connect', function () {
+        	console.log('Połączony! '+ pozycja1 + ' ' + pozycja2);
+    	});
+
+    socket.on('message', function (msg) {
+        var data = msg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        $('#log ul').append('<li>' + data + '</li>');
+        entry_el.focus();
+    });
+	
 
 }
 
@@ -340,7 +362,8 @@ function pozycjaLosowa(n){
 	ustawPozycje(n,pos1,pos);
 	dX[n]=pos1;
 	dY[n]=pos;
-
+pozycja1 = pos;
+pozycja2 =pos1;
 }
 
 ///////////////////////////////// ustawienie na pozycji

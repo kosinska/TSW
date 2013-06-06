@@ -34,30 +34,20 @@ var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
+///////////////////////////////////////
 var io=require('socket.io');
 var socket=io.listen(server);
 
-function init(){
-	var players = [];
-	
-	socket.configure(function(){
-		socket.set("transport", ["websocket"]);
-		socket.set("log level", 2);
-	});
-	
-	setEventHandlers();
-};
-init();
+'use strict';
+    var username;
 
-var setEventHandlers = function(){
-	socket.sockets.on("connection", onSocketConnection);
-};
-
-function onSocketConnection(client) {
-    util.log("New player has connected: "+client.id);
-    client.on("disconnect", onClientDisconnect);
-    client.on("new player", onNewPlayer);
-    client.on("move player", onMovePlayer);
-};
-
+    client.on('polozenie', function (msg) {
+        if (!username) {
+            username = msg;
+            client.send();
+            client.broadcast.emit('message', 'Nowy użytkownik: ' + username);
+            return;
+        }
+        client.broadcast.emit('message', username + ': ' + msg);
+    });
+});
