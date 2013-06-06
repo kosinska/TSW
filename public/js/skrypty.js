@@ -335,7 +335,14 @@ $('#pole_gry').append('<div id ="gamefield"></div>');
 	
 	var socket=io.connect(window.location.hostname);
 		
-		socket.on('connection',function(){
+	socket.on('connection',function(socket){
+		socket.emit('wyslijpozycje',{ pos: '1', pos1: '2'});
+		
+		console.log(pos,pos1);
+		
+		socket.on('loop',function(){
+			socket.emit('wyslijpozycje',{ pos: '1', pos1: '2'});
+		});
 		
     });
 	

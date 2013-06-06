@@ -37,7 +37,30 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 ///////////////////////////////////////
 var io=require('socket.io');
 var socket=io.listen(server);
+var i=0;
 
-    socket.on('connection', function () {
-        console.log('Dolaczyl gracz');
+
+var uzytkownicy = new Array();
+
+    socket.on('connection', function (client) {
+    	i++;
+        console.log('Dolaczyl gracz: '+i);
+        uzytkownicy[uzytkownicy.length]=client;
+        client.on('disconnect', function(client){
+        	i--;
+        	index = uzytkownicy.indexOf(client);
+        	uzytkownicy.splice(index,1);
+        	console.log(i);
+        });
+        client.on("wyslijpozycje", function(pos1,pos2){ 
+        	console.log("\n\n\n\n     pozycja klienta: "+pos+","+pos1 + "    \n\n\n");
+        	client.emit("loop");
+        });
+        console.log('ilosc uzytkownikow: '+uzytkownicy.length);
+    
+    	for(i=0; i<uzytkownicy.length; i++){
+        	console.log('uzytkownik: '+uzytkownicy[i].id);
+        }
+
+    
     });
