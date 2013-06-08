@@ -1,9 +1,3 @@
-$(document).ready(function () {
-
-
-});
-
-
 var pozycja =0;
 var pozycja2 =0;
 
@@ -11,13 +5,13 @@ var pchly=new Array(5);
 
 
 ///////////////////////////////// tablica pchel
-for(i=0; i<5;i++){
+for(i=0; i<1;i++){
 	pchly[i]=new Array(9);
 }
 
 
 ///////////////////////////////// tablica pchel skladowych
-for(j=0;j<5;j++){
+for(j=0;j<1;j++){
 	for(k=0;k<9;k++){
 		if(k<2){
 			pchly[j][k]= '<div onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
@@ -39,55 +33,6 @@ var dX=new Array();
 var dY=new Array();
 
 var licznik_pkt=0;
-
-$(document).ready(function() {
-  $('body').append('<div id="zegarek"></div>');
-});
-
-
-var licznik = new odliczanie({  
-    sekundy: 40,
-    onUpdateStatus: function(sec){console.log(sec); $('#zegarek').html("<p>Czas: "+sec + "</p>");}, //$('#zegar').children().remove();
-    onCounterEnd: function(){if(licznik_pkt != 5){ alert('Czas się skończył! Przegrałeś :(');
-							window.location.href='/';}}
-});
-
-///////////////////////////////// odliczanie czasu
-function odliczanie(options) {
-  var timer,
-  instance = this,
-  sekundy = options.sekundy || 10,
-  updateStatus = options.onUpdateStatus || function () {},
-  counterEnd = options.onCounterEnd || function () {};
-
-  function zmiejszLicznik() {
-    updateStatus(sekundy);
-   
-    if (sekundy <=5 ) $('#body').css( "background-color", "#FF6A6A")
-    if (sekundy <=4 ) $('#body').css( "background-color", "#FDF5E6")
-    if (sekundy <=3 ) $('#body').css( "background-color", "#FF6A6A")
-    if (sekundy <=2 ) $('#body').css( "background-color", "#FDF5E6")
-    if (sekundy <=1 ) $('#body').css( "background-color", "#FF6A6A")
-    if (sekundy === 0) {
-      counterEnd();
-      instance.stop();
-    }
-    sekundy--;
-     
-   
-  }
-
-  this.start = function () {
-    clearInterval(timer);
-    timer = 0;
-    sekundy = options.sekundy;
-    timer = setInterval(zmiejszLicznik, 1000);
-  };
-
-  this.stop = function () {
-    clearInterval(timer);
-  };
-}
 
 
 ///////////////////////////////// odklikniecie myszy z lewej/prawej
@@ -113,7 +58,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 						
-				if(licznik_pkt == 5){
+				if(licznik_pkt == 1){
 					$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -139,7 +84,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 5){
+				if(licznik_pkt == 1){
 					$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -179,7 +124,7 @@ function rPion(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 5){
+				if(licznik_pkt == 1){
 				$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -206,7 +151,7 @@ function rPion(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 				
-				if(licznik_pkt == 5){
+				if(licznik_pkt == 1){
 				$('#gamefield').remove();
 					alert("Wygrales!");
 					window.location.href='/';
@@ -224,14 +169,8 @@ function rPion(dir,n){
 
 }
 
-///////////////////////////////// klikniecie przycisku sam
-function sam(){
-
-	document.getElementById("sam").innerHTML="Grasz sam^^ masz 40sek";
-	licznik.start();
-
-	this.disabled=false;document.getElementById("multi1").disabled=true;
-	this.disabled=false;document.getElementById("sam1").disabled=true;
+///////////////////////////////// po zaladowaniu dokumentu
+$(document).ready(function () {
 
 	$('#pole_gry').append('<div id ="gamefield"></div>');
 
@@ -247,60 +186,14 @@ function sam(){
 	$('#gamefield').append(pchly[0][3]);
 	$('#gamefield').append(pchly[0][7] + '<br / >');
 	pozycjaLosowa(0);
-
-	$('#gamefield').append(pchly[1][4]);
-	$('#gamefield').append(pchly[1][2]);
-	$('#gamefield').append(pchly[1][5] + '<br / >');
-
-	$('#gamefield').append(pchly[1][0]);
-	$('#gamefield').append(pchly[1][8]);
-	$('#gamefield').append(pchly[1][1] + '<br / >');
-
-	$('#gamefield').append(pchly[1][6]);
-	$('#gamefield').append(pchly[1][3]);
-	$('#gamefield').append(pchly[1][7] + '<br / >');
-	pozycjaLosowa(1);
 	
-	$('#gamefield').append(pchly[2][4]);
-	$('#gamefield').append(pchly[2][2]);
-	$('#gamefield').append(pchly[2][5] + '<br / >');
-
-	$('#gamefield').append(pchly[2][0]);
-	$('#gamefield').append(pchly[2][8]);
-	$('#gamefield').append(pchly[2][1] + '<br / >');
-
-	$('#gamefield').append(pchly[2][6]);
-	$('#gamefield').append(pchly[2][3]);
-	$('#gamefield').append(pchly[2][7] + '<br / >');
-	pozycjaLosowa(2);
+	var socket=io.connect(window.location.hostname);
 	
-	$('#gamefield').append(pchly[3][4]);
-	$('#gamefield').append(pchly[3][2]);
-	$('#gamefield').append(pchly[3][5] + '<br / >');
+	socket.on('p',function(){
+		alert('przegrales');
+	});
 
-	$('#gamefield').append(pchly[3][0]);
-	$('#gamefield').append(pchly[3][8]);
-	$('#gamefield').append(pchly[3][1] + '<br / >');
-
-	$('#gamefield').append(pchly[3][6]);
-	$('#gamefield').append(pchly[3][3]);
-	$('#gamefield').append(pchly[3][7] + '<br / >');
-	pozycjaLosowa(3);
-	
-	$('#gamefield').append(pchly[4][4]);
-	$('#gamefield').append(pchly[4][2]);
-	$('#gamefield').append(pchly[4][5] + '<br / >');
-
-	$('#gamefield').append(pchly[4][0]);
-	$('#gamefield').append(pchly[4][8]);
-	$('#gamefield').append(pchly[4][1] + '<br / >');
-
-	$('#gamefield').append(pchly[4][6]);
-	$('#gamefield').append(pchly[4][3]);
-	$('#gamefield').append(pchly[4][7] + '<br / >');
-	pozycjaLosowa(4);
-
-}
+});
 
 ///////////////////////////////// klikniecie przycisku wielu_graczy
 function wielu_graczy(){
@@ -311,6 +204,29 @@ function wielu_graczy(){
 	this.disabled=false;document.getElementById("sam1").disabled=true;
 	this.disabled=false;document.getElementById("multi1").disabled=true;
 	
+
+$('#pole_gry').append('<div id ="gamefield"></div>');
+
+	$('#gamefield').append(pchly[0][4]);
+	$('#gamefield').append(pchly[0][2]);
+	$('#gamefield').append(pchly[0][5] + '<br / >');
+
+	$('#gamefield').append(pchly[0][0]);
+	$('#gamefield').append(pchly[0][8]);
+	$('#gamefield').append(pchly[0][1] + '<br / >');
+
+	$('#gamefield').append(pchly[0][6]);
+	$('#gamefield').append(pchly[0][3]);
+	$('#gamefield').append(pchly[0][7] + '<br / >');
+	pozycjaLosowa(0);
+	
+	
+	var socket=io.connect(window.location.hostname);
+	
+	socket.on('p',function(){
+		alert('przegrales');
+	});
+
 }
 
 ///////////////////////////////// losowanie pozycji
@@ -328,8 +244,8 @@ function pozycjaLosowa(n){
 	ustawPozycje(n,pos1,pos);
 	dX[n]=pos1;
 	dY[n]=pos;
-	pozycja1 = pos;
-	pozycja2 =pos1;
+pozycja1 = pos;
+pozycja2 =pos1;
 }
 
 ///////////////////////////////// ustawienie na pozycji
@@ -341,3 +257,4 @@ function ustawPozycje(n,x,y){
 	}
 
 }
+
