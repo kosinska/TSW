@@ -44,7 +44,7 @@ function rPoz(dir,n){
 			dX[n] += 50;
 				if(dX[n] >= 340) dX[n] = 340;
 				
-				if( dX[n] >= 150 && dY[n] == 150 ) {
+				if( dX[n] == 150 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
 					if(n==2)$('.pchla'+n).remove();
@@ -52,7 +52,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if( dX[n] >= 150 && dY[n] == 200 ) {
+				if( dX[n] == 150 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
 					if(n==2)$('.pchla'+n).remove();
@@ -72,7 +72,7 @@ function rPoz(dir,n){
 			dX[n] -= 50;
 				if(dX[n] < 0) dX[n] = 0;
 				
-				if( dX[n] <= 200 && dY[n] == 150 ) {
+				if( dX[n] == 200 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
 					if(n==2)$('.pchla'+n).remove();
@@ -80,7 +80,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if( dX[n] <= 200 && dY[n] == 200 ) {
+				if( dX[n] == 200 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();if(n==2)$('.pchla'+n).remove();
 					if(n==3)$('.pchla'+n).remove();
@@ -178,9 +178,9 @@ function rPion(dir,n){
 ///////////////////////////////// po zaladowaniu dokumentu
 $(document).ready(function () {
 
-	socket=io.connect(window.location.hostname);
+socket=io.connect(window.location.hostname);
 
-	socket.on('gracz1', function(){
+socket.on('gracz1', function(){
 		$('.pchla0').css({"backgroundColor":"#EE6363"});
 	});
 	
@@ -188,6 +188,7 @@ $(document).ready(function () {
 		$('.pchla0').css({"backgroundColor":"#CAE1FF"});
 		socket.on('nowy', function(){
 			//wyslij wspolrzedne do reszty graczy
+		});		
 	});
 	
 	socket.on('gracz3', function(){
@@ -228,32 +229,6 @@ $(document).ready(function () {
 
 });
 
-///////////////////////////////// klikniecie przycisku wielu_graczy
-function wielu_graczy(){
-
-	$('#body').append('<script type="text/javascript" src=\'/js/skrypty_multi.js\'></script>');
-	document.getElementById("multi").innerHTML="Grasz z innymi graczami... Pierwszy wygrywa";
-	
-	this.disabled=false;document.getElementById("sam1").disabled=true;
-	this.disabled=false;document.getElementById("multi1").disabled=true;
-	
-
-$('#pole_gry').append('<div id ="gamefield"></div>');
-
-	$('#gamefield').append(pchly[0][4]);
-	$('#gamefield').append(pchly[0][2]);
-	$('#gamefield').append(pchly[0][5] + '<br / >');
-
-	$('#gamefield').append(pchly[0][0]);
-	$('#gamefield').append(pchly[0][8]);
-	$('#gamefield').append(pchly[0][1] + '<br / >');
-
-	$('#gamefield').append(pchly[0][6]);
-	$('#gamefield').append(pchly[0][3]);
-	$('#gamefield').append(pchly[0][7] + '<br / >');
-	pozycjaLosowa(0);
-
-}
 
 ///////////////////////////////// losowanie pozycji
 function pozycjaLosowa(n){

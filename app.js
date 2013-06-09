@@ -58,7 +58,7 @@ var uzytkownicy = new Array();
 			}
 			if(i==2){
 				client.emit('gracz2')
-				client.broadcast.emit('nowy')
+				//client.broadcast.emit('nowy')
 			}
 			if(i==3){
 				client.emit('gracz3')
@@ -71,10 +71,11 @@ var uzytkownicy = new Array();
 			}
  
 
-        client.on("wyslijpozycje", function(pos1,pos2){ 
+       /* client.on("wyslijpozycje", function(pos1,pos2){ 
         	console.log("\n\n\n\n     pozycja klienta: "+pos+","+pos1 + "    \n\n\n");
         	client.emit("loop");
-        });
+        });*/
+        
         console.log('ilosc uzytkownikow: '+uzytkownicy.length);
     
     	for(i=0; i<uzytkownicy.length; i++){
