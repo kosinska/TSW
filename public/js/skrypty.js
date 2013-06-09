@@ -97,7 +97,7 @@ function rPoz(dir,n){
 			dX[n] += 50;
 				if(dX[n] >= 340) dX[n] = 340;
 				
-				if( dX[n] >= 150 && dY[n] == 150 ) {
+				if( dX[n] == 150 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
 					if(n==2)$('.pchla'+n).remove();
@@ -105,7 +105,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if( dX[n] >= 150 && dY[n] == 200 ) {
+				if( dX[n] == 150 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
 					if(n==2)$('.pchla'+n).remove();
@@ -124,7 +124,7 @@ function rPoz(dir,n){
 			dX[n] -= 50;
 				if(dX[n] < 0) dX[n] = 0;
 				
-				if( dX[n] <= 200 && dY[n] == 150 ) {
+				if( dX[n] == 200 && dY[n] == 150 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();
 					if(n==2)$('.pchla'+n).remove();
@@ -132,7 +132,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if( dX[n] <= 200 && dY[n] == 200 ) {
+				if( dX[n] == 200 && dY[n] == 200 ) {
 					if(n==0)$('.pchla'+n).remove();
 					if(n==1)$('.pchla'+n).remove();if(n==2)$('.pchla'+n).remove();
 					if(n==3)$('.pchla'+n).remove();

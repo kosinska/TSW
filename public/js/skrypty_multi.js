@@ -1,3 +1,5 @@
+var socket;
+
 var pozycja =0;
 var pozycja2 =0;
 
@@ -60,6 +62,7 @@ function rPoz(dir,n){
 						
 				if(licznik_pkt == 1){
 					$('#gamefield').remove();
+					socket.emit('przegrana');
 					alert("Wygrales!");
 					window.location.href='/';
 				}
@@ -86,6 +89,7 @@ function rPoz(dir,n){
 					
 				if(licznik_pkt == 1){
 					$('#gamefield').remove();
+					socket.emit('przegrana');					
 					alert("Wygrales!");
 					window.location.href='/';
 				}
@@ -125,7 +129,8 @@ function rPion(dir,n){
 					licznik_pkt++;};
 					
 				if(licznik_pkt == 1){
-				$('#gamefield').remove();
+				$('#gamefield').remove();									           
+				    socket.emit('przegrana');
 					alert("Wygrales!");
 					window.location.href='/';
 				}
@@ -153,6 +158,7 @@ function rPion(dir,n){
 				
 				if(licznik_pkt == 1){
 				$('#gamefield').remove();
+					socket.emit('przegrana');
 					alert("Wygrales!");
 					window.location.href='/';
 				}
@@ -172,6 +178,32 @@ function rPion(dir,n){
 ///////////////////////////////// po zaladowaniu dokumentu
 $(document).ready(function () {
 
+	socket=io.connect(window.location.hostname);
+
+	socket.on('gracz1', function(){
+		$('.pchla0').css({"backgroundColor":"#EE6363"});
+	});
+	
+	socket.on('gracz2', function(){
+		$('.pchla0').css({"backgroundColor":"#CAE1FF"});
+		socket.on('nowy', function(){
+			//wyslij wspolrzedne do reszty graczy
+	});
+	
+	socket.on('gracz3', function(){
+		$('.pchla0').css({"backgroundColor":"green"});
+	});
+	
+	socket.on('gracz4', function(){
+		$('.pchla0').css({"backgroundColor":"#CD6090"});
+	});
+	
+	socket.on('za_duzo_graczy', function(){
+		$('#pole_gry').remove();
+		alert('Za duzo graczy... poczekaj, albo zagraj single palyer');
+		window.location.href='/';
+	});
+
 	$('#pole_gry').append('<div id ="gamefield"></div>');
 
 	$('#gamefield').append(pchly[0][4]);
@@ -187,10 +219,11 @@ $(document).ready(function () {
 	$('#gamefield').append(pchly[0][7] + '<br / >');
 	pozycjaLosowa(0);
 	
-	var socket=io.connect(window.location.hostname);
+	
 	
 	socket.on('p',function(){
 		alert('przegrales');
+		window.location.href='/';
 	});
 
 });
@@ -219,13 +252,6 @@ $('#pole_gry').append('<div id ="gamefield"></div>');
 	$('#gamefield').append(pchly[0][3]);
 	$('#gamefield').append(pchly[0][7] + '<br / >');
 	pozycjaLosowa(0);
-	
-	
-	var socket=io.connect(window.location.hostname);
-	
-	socket.on('p',function(){
-		alert('przegrales');
-	});
 
 }
 
@@ -244,8 +270,8 @@ function pozycjaLosowa(n){
 	ustawPozycje(n,pos1,pos);
 	dX[n]=pos1;
 	dY[n]=pos;
-pozycja1 = pos;
-pozycja2 =pos1;
+	pozycja1 = pos;
+	pozycja2 = pos1;
 }
 
 ///////////////////////////////// ustawienie na pozycji

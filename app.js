@@ -53,6 +53,24 @@ var uzytkownicy = new Array();
         	uzytkownicy.splice(index,1);
         	console.log(i);
         });
+			if(i==1){
+				client.emit('gracz1')
+			}
+			if(i==2){
+				client.emit('gracz2')
+				client.broadcast.emit('nowy')
+			}
+			if(i==3){
+				client.emit('gracz3')
+			}
+			if(i==4){
+				client.emit('gracz4')
+			}
+			if(i>4){
+				client.emit('za_duzo_graczy')
+			}
+ 
+
         client.on("wyslijpozycje", function(pos1,pos2){ 
         	console.log("\n\n\n\n     pozycja klienta: "+pos+","+pos1 + "    \n\n\n");
         	client.emit("loop");
