@@ -49,10 +49,10 @@ socket.on('connection', function (client) {
         uzytkownicy[uzytkownicy.length]=client;
         
         client.on('disconnect', function(client){
-        	i--;
-        	index = uzytkownicy.indexOf(client);
-        	uzytkownicy.splice(index,1);
-        	console.log(i);
+        i--;
+    	index = uzytkownicy.indexOf(client);
+    	uzytkownicy.splice(index,1);
+    	console.log(i);
         });
 
 ///////////////////////////////////////
@@ -61,31 +61,49 @@ socket.on('connection', function (client) {
     	}
     	
 ///////////////////////////////////////        
-		if(i==1){
-			client.emit('gracz1')
-		}
-		if(i==2){
-			client.emit('gracz2')
-		}
-		if(i==3){
-			client.emit('gracz3')
-		}
-		if(i==4){
-			client.emit('gracz4')
-		}
-		if(i>4){
-			client.emit('za_duzo_graczy')
-		}
+	if(i==1){
+		client.emit('gracz1')
+	}
+	if(i==2){
+		client.emit('gracz2')
+	}
+	if(i==3){
+		client.emit('gracz3')
+	}
+	if(i==4){
+		client.emit('gracz4')
+	}
+	if(i>4){
+		client.emit('za_duzo_graczy')
+	}
 
 			
 ///////////////////////////////////////
-		client.on('przegrana',function(){
-    		client.broadcast.emit('p');
-    	});
+	client.on('przegrana',function(){
+		client.broadcast.emit('p');
+   	});
 
 ///////////////////////////////////////
-		socket.on('ruCH', function(data){
-			socket.emit('poRuCHu', data);
-		});    
+	client.on('ruCH', function(data){
+//		client.emit('poRuCHu', data);
+//		console.log(data);
+	});    
+    
+    var dostepne_kolory = ['red','blue','black','white','pink','grey','green','yellow'];
+    var kolor_gracza = [];
+	var pozycja = {}
+    client.on('pozycja_gracza', function(id, x, y) {
+      if(typeof kolor_gracza[id] === 'undefined') {
+        kolor_gracza[id] = dostepne_kolory[0];
+        delete dostepne_kolory[0]
+      }
+      pozycja[id] = [id,x,y,kolor_gracza[id]];
+      client.broadcast.emit('nowa_pozycja', {id:id, x:x, y:y,color:kolor_gracza[id]});
+    });
+    client.on('pobierz_dane', function() {
+      client.emit('obecni_gracze', {gracze: pozycja, ja:client.id});
+    });
     
 });
+
+
