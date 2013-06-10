@@ -39,52 +39,53 @@ var io=require('socket.io');
 var socket=io.listen(server);
 var i=0;
 
-
 var uzytkownicy = new Array();
 
-    socket.on('connection', function (client) {
+
+socket.on('connection', function (client) {
     
     	i++;
         console.log('Dolaczyl gracz: '+i);
         uzytkownicy[uzytkownicy.length]=client;
+        
         client.on('disconnect', function(client){
         	i--;
         	index = uzytkownicy.indexOf(client);
         	uzytkownicy.splice(index,1);
         	console.log(i);
         });
-			if(i==1){
-				client.emit('gracz1')
-			}
-			if(i==2){
-				client.emit('gracz2')
-				//client.broadcast.emit('nowy')
-			}
-			if(i==3){
-				client.emit('gracz3')
-			}
-			if(i==4){
-				client.emit('gracz4')
-			}
-			if(i>4){
-				client.emit('za_duzo_graczy')
-			}
-			
-        
-        console.log('ilosc uzytkownikow: '+uzytkownicy.length);
-    
-    	for(i=0; i<uzytkownicy.length; i++){
-        	console.log('uzytkownik: '+uzytkownicy[i].id);
-        }
 
+///////////////////////////////////////
+    	for(i=0; i<uzytkownicy.length; i++){
+    		console.log('uzytkownik: '+uzytkownicy[i].id);
+    	}
+    	
+///////////////////////////////////////        
+		if(i==1){
+			client.emit('gracz1')
+		}
+		if(i==2){
+			client.emit('gracz2')
+		}
+		if(i==3){
+			client.emit('gracz3')
+		}
+		if(i==4){
+			client.emit('gracz4')
+		}
+		if(i>4){
+			client.emit('za_duzo_graczy')
+		}
+
+			
+///////////////////////////////////////
 		client.on('przegrana',function(){
     		client.broadcast.emit('p');
     	});
 
-    	
-    	client.on('pozycja', function(){
-    		client.broadcast.emit('pozy');
-    	});
+///////////////////////////////////////
+		socket.on('ruCH', function(data){
+			socket.emit('poRuCHu', data);
+		});    
     
-    
-    });
+});

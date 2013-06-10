@@ -39,6 +39,7 @@ function rPoz(dir,n){
 	
 		if(dir===0){
 			dX[n] += 50;
+			socket.emit('ruCH',{dX[n]});
 				if(dX[n] >= 340) dX[n] = 340;
 				
 				if( dX[n] == 150 && dY[n] == 150 ) {
@@ -67,6 +68,7 @@ function rPoz(dir,n){
 		}
 		else if (dir===1){
 			dX[n] -= 50;
+			socket.emit('ruCH',{dX[n]});
 				if(dX[n] < 0) dX[n] = 0;
 				
 				if( dX[n] == 200 && dY[n] == 150 ) {
@@ -107,6 +109,7 @@ function rPion(dir,n){
 
 		if(dir===2){
 			dY[n] += 50;
+			socket.emit('ruCH',{dY[n]});
 				if(dY[n] >= 340) dY[n] = 340;
 				
 				if( dX[n] == 150 && dY[n] == 150 ) {
@@ -135,6 +138,7 @@ function rPion(dir,n){
 		}
 		else if (dir===3){
 			dY[n] -= 50;
+			socket.emit('ruCH',{dY[n]});
 				if(dY[n] < 0) dY[n] = 0;
 				
 				if( dX[n] == 150 && dY[n] == 200 ) {
@@ -175,34 +179,6 @@ function rPion(dir,n){
 ///////////////////////////////// po zaladowaniu dokumentu
 $(document).ready(function () {
 
-socket=io.connect(window.location.hostname);
-
-	socket.on('gracz1', function(){
-		$('.pchla0').css({"backgroundColor":"#EE6363"});
-		socket.emit('pozycja');
-	});
-	
-	socket.on('gracz2', function(){
-		$('.pchla0').css({"backgroundColor":"#CAE1FF"});
-		socket.emit('pozycja');
-	});
-	
-	socket.on('gracz3', function(){
-		$('.pchla0').css({"backgroundColor":"green"});
-		socket.emit('pozycja');
-	});
-	
-	socket.on('gracz4', function(){
-		$('.pchla0').css({"backgroundColor":"#CD6090"});
-		socket.emit('pozycja');
-	});
-	
-	socket.on('za_duzo_graczy', function(){
-		$('#pole_gry').remove();
-		alert('Za duzo graczy... poczekaj, albo zagraj single palyer');
-		window.location.href='/';
-	});
-
 	$('#pole_gry').append('<div id ="gamefield"></div>');
 
 	$('#gamefield').append(pchly[0][4]);
@@ -217,10 +193,43 @@ socket=io.connect(window.location.hostname);
 	$('#gamefield').append(pchly[0][3]);
 	$('#gamefield').append(pchly[0][7] + '<br / >');
 	pozycjaLosowa(0);
+
+socket=io.connect(window.location.hostname);
+
+	socket.on('gracz1', function(){
+		$('.pchla0').css({"backgroundColor":"#EE6363"});
+
+	});
 	
-	var pozycja_pchly=pozycjaLosowa(0);
+	socket.on('gracz2', function(){
+		$('.pchla0').css({"backgroundColor":"#CAE1FF"});
+		
+	});
 	
-	socket.on('pozy', function(){
+	socket.on('gracz3', function(){
+		$('.pchla0').css({"backgroundColor":"green"});
+		
+	});
+	
+	socket.on('gracz4', function(){
+		$('.pchla0').css({"backgroundColor":"#CD6090"});
+		
+	});
+	
+	socket.on('za_duzo_graczy', function(){
+		$('#pole_gry').remove();
+		alert('Za duzo graczy... poczekaj, albo zagraj single palyer');
+		window.location.href='/';
+	});
+
+	
+	socket.on('p',function(){
+		alert('Przegrales...');
+		window.location.href='/';
+	});
+	
+	
+	socket.on('poRuCHu', function(data){
 		$('#gamefield').append(pchly[0][4]);
 		$('#gamefield').append(pchly[0][2]);
 		$('#gamefield').append(pchly[0][5] + '<br / >');
@@ -232,17 +241,15 @@ socket=io.connect(window.location.hostname);
 		$('#gamefield').append(pchly[0][6]);
 		$('#gamefield').append(pchly[0][3]);
 		$('#gamefield').append(pchly[0][7] + '<br / >');
-		pozycjaLosowa(0);
-
-	});
 	
-	socket.on('p',function(){
-		alert('przegrales');
-		window.location.href='/';
+	for(i=0;i<9;i++){
+		$('#pchla'+n+i).animate({ top: dY + 'px'});
+		$('#pchla'+n+i).animate({ left: dX + 'px'});
+	}
+	
 	});
 
 });
-
 
 ///////////////////////////////// losowanie pozycji
 function pozycjaLosowa(n){
@@ -271,4 +278,3 @@ function ustawPozycje(n,x,y){
 	}
 
 }
-
