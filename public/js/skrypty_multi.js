@@ -1,10 +1,9 @@
 var socket = io.connect();
-socket.on('connect', function(){
-	socket.emit('pobierz_dane');
-});
+var my_id = undefined;
 
 var pchly=new Array(5);
 
+var gracze = {};
 
 ///////////////////////////////// tablica pchel
 for(i=0; i<1;i++){
@@ -43,7 +42,7 @@ function rPoz(dir,n){
 		if(dir===0){
 			dX[n] += 50;
 			console.log(dX);
-	socket.emit('pozycja_gracza', socket.id, dX[n], dY[n]);
+	
 				if(dX[n] >= 340) dX[n] = 340;
 				
 				if( dX[n] == 150 && dY[n] == 150 ) {
@@ -73,7 +72,7 @@ function rPoz(dir,n){
 		else if (dir===1){
 			dX[n] -= 50;
 			console.log(dX);
-	socket.emit('pozycja_gracza', socket.id, dX[n], dY[n]);
+	
 				if(dX[n] < 0) dX[n] = 0;
 				
 				if( dX[n] == 200 && dY[n] == 150 ) {
@@ -105,7 +104,7 @@ function rPoz(dir,n){
 		left: dX[n] + 'px'
 		});
 	}
-
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[n], y:dY[n]});
 }
 
 
@@ -114,7 +113,7 @@ function rPion(dir,n){
 
 		if(dir===2){
 			dY[n] += 50;
-	socket.emit('pozycja_gracza', socket.id, dX[n], dY[n]);
+	//socket.emit('pozycja_gracza', socket.id, dX[n], dY[n]);
 				if(dY[n] >= 340) dY[n] = 340;
 				
 				if( dX[n] == 150 && dY[n] == 150 ) {
@@ -143,7 +142,7 @@ function rPion(dir,n){
 		}
 		else if (dir===3){
 			dY[n] -= 50;
-	socket.emit('pozycja_gracza', socekt.id, dX[n], dY[n]);
+	//socket.emit('pozycja_gracza', socekt.id, dX[n], dY[n]);
 				if(dY[n] < 0) dY[n] = 0;
 				
 				if( dX[n] == 150 && dY[n] == 200 ) {
@@ -177,7 +176,7 @@ function rPion(dir,n){
 		top: dY[n] + 'px'
 		});
 	}
-
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[n], y:dY[n]});
 
 }
 
@@ -197,28 +196,41 @@ $(document).ready(function () {
 	$('#gamefield').append(pchly[0][6]);
 	$('#gamefield').append(pchly[0][3]);
 	$('#gamefield').append(pchly[0][7] + '<br / >');
-	pozycjaLosowa(0);
 
-	socket.on('gracz1', function(){
-		$('.pchla0').css({"backgroundColor":"#EE6363"});
+    socket.on('connect', function(socket){
+    });
+    
+    socket.on('witaj_graczu', function(data){
+        if (my_id == undefined){
+            my_id = data.id;
+            var color = data.color;
+            wsp = pozycjaLosowa(0);        
+            $('.pchla0').css({"backgroundColor":color});
+            gracze[data.id]=color;
+            socket.emit('pozycja_gracza', { id:my_id, x:wsp[0], y:wsp[1]});
+        }
+    });
+    
+    socket.on('nowa_pozycja', function(data) {
+        console.log(data);
+        $('#'+data.id).animate({top:data.y+'px'}).animate({left:data.x+'px'});
+    });
 
-	});
-	
-	socket.on('gracz2', function(){
-		$('.pchla0').css({"backgroundColor":"#CAE1FF"});
-		
-	});
-	
-	socket.on('gracz3', function(){
-		$('.pchla0').css({"backgroundColor":"green"});
-		
-	});
-	
-	socket.on('gracz4', function(){
-		$('.pchla0').css({"backgroundColor":"#CD6090"});
-		
-	});
-	
+
+    socket.on('obecni_gracze', function(data) {
+        console.log(data);
+        for(var id in data) {
+            console.log(id);
+            gracz = data[id];
+            console.log(gracz);
+            if (gracze[id] == undefined){
+                gracze[id] = gracz.color;
+                $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
+              $('#'+id).animate({top:gracz.y+'px'}).animate({left:gracz.x+'px'});
+            }
+        }
+    });
+
 	socket.on('za_duzo_graczy', function(){
 		$('#pole_gry').remove();
 		alert('Za duzo graczy... poczekaj, albo zagraj single palyer');
@@ -271,36 +283,14 @@ function pozycjaLosowa(n){
 	dX[n]=pos1;
 	dY[n]=pos;
 	
-socket.emit('pozycja_gracza', socket.id, pos1, pos);
+    return [dX,dY]
 
 }
 
-socket.on('nowa_pozycja', function(data) {
-  console.log(data);
-  if($('#'+data.id).length !== 0) {
-    $('#'+data.id).animate({top:data.y+'px'}).animate({left:data.x+'px'});
-  } else {
-    $('#gamefield').append('<div id="'+data.id+'" style="width:45px;height:45px;background-color:'+data.color+'"></div>');
-  }
-});
-
-socket.on('obecni_gracze', function(data) {
-  for(var i in data.gracze) {
-    gracz = data.gracze[i];
-    console.log(gracz[0] + ' ' + data.ja);
-    if(gracz[0] !== data.ja) {
-      $('#gamefield').append('<div id="'+gracz[0]+'" style="width:45px;height:45px;background-color:'+gracz[3]+'"></div>');
-      $('#'+gracz[0]).animate({top:gracz[1]+'px'}).animate({left:gracz[2]+'px'});
-    }
-  }
-});
-
 ///////////////////////////////// ustawienie na pozycji
 function ustawPozycje(n,x,y){
-
 	for(i=0;i<9;i++){
 		$('#pchla'+n+i).animate({ top: y + 'px'});
 		$('#pchla'+n+i).animate({ left: x + 'px'});
 	}
-socket.emit('pozycja_gracza', socket.id, x, y);
 }

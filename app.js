@@ -39,46 +39,34 @@ var io=require('socket.io');
 var socket=io.listen(server);
 var i=0;
 
-var uzytkownicy = new Array();
+var uzytkownicy = {};
+var dostepne_kolory = ['red','blue','black','white','pink','grey','green','yellow'];
 
+console.log(uzytkownicy);
 
 socket.on('connection', function (client) {
+
+    if (i < dostepne_kolory.length){
+        var color = dostepne_kolory[i];
+        uzytkownicy[client.id] = { x:0, y:0, color:color };
+        client.emit('witaj_graczu', { id: client.id, color: color });
+        client.emit('obecni_gracze', uzytkownicy);
+        client.broadcast.emit('obecni_gracze', uzytkownicy);
+    }else{
+        client.emit('za_duzo_graczy');
+    }
     
-    	i++;
-        console.log('Dolaczyl gracz: '+i);
-        uzytkownicy[uzytkownicy.length]=client;
-        
-        client.on('disconnect', function(client){
+	i++;
+    console.log('Dolaczyl gracz: '+i);
+    
+///////////////////////////////////////
+
+    client.on('disconnect', function(){
         i--;
-    	index = uzytkownicy.indexOf(client);
-    	uzytkownicy.splice(index,1);
-    	console.log(i);
-        });
+        delete uzytkownicy[client.id];
+        console.log(i);
+    });
 
-///////////////////////////////////////
-    	for(i=0; i<uzytkownicy.length; i++){
-    		console.log('uzytkownik: '+uzytkownicy[i].id);
-    	}
-    	
-///////////////////////////////////////        
-	if(i==1){
-		client.emit('gracz1')
-	}
-	if(i==2){
-		client.emit('gracz2')
-	}
-	if(i==3){
-		client.emit('gracz3')
-	}
-	if(i==4){
-		client.emit('gracz4')
-	}
-	if(i>4){
-		client.emit('za_duzo_graczy')
-	}
-
-			
-///////////////////////////////////////
 	client.on('przegrana',function(){
 		client.broadcast.emit('p');
    	});
@@ -88,22 +76,18 @@ socket.on('connection', function (client) {
 //		client.emit('poRuCHu', data);
 //		console.log(data);
 	});    
-    
-    var dostepne_kolory = ['red','blue','black','white','pink','grey','green','yellow'];
-    var kolor_gracza = [];
-	var pozycja = {}
-    client.on('pozycja_gracza', function(id, x, y) {
-      if(typeof kolor_gracza[id] === 'undefined') {
-        kolor_gracza[id] = dostepne_kolory[0];
-        delete dostepne_kolory[0]
+
+	
+    client.on('pozycja_gracza', function(data) {
+      if (uzytkownicy[data.id] == undefined){
+        console.log('niepoprawne id:',data.id);
+        return;
       }
-      pozycja[id] = [id,x,y,kolor_gracza[id]];
-      client.broadcast.emit('nowa_pozycja', {id:id, x:x, y:y,color:kolor_gracza[id]});
+      uzytkownicy[data.id].x = data.x;
+      uzytkownicy[data.id].y = data.y;
+      client.broadcast.emit('nowa_pozycja', { id:data.id, x:data.x, y:data.y });
     });
-    client.on('pobierz_dane', function() {
-      client.emit('obecni_gracze', {gracze: pozycja, ja:client.id});
-    });
-    
+
 });
 
 
