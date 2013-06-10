@@ -1,8 +1,5 @@
 var socket;
 
-var pozycja =0;
-var pozycja2 =0;
-
 var pchly=new Array(5);
 
 
@@ -180,23 +177,24 @@ $(document).ready(function () {
 
 socket=io.connect(window.location.hostname);
 
-socket.on('gracz1', function(){
+	socket.on('gracz1', function(){
 		$('.pchla0').css({"backgroundColor":"#EE6363"});
+		socket.emit('pozycja');
 	});
 	
 	socket.on('gracz2', function(){
 		$('.pchla0').css({"backgroundColor":"#CAE1FF"});
-		socket.on('nowy', function(){
-			//wyslij wspolrzedne do reszty graczy
-		});		
+		socket.emit('pozycja');
 	});
 	
 	socket.on('gracz3', function(){
 		$('.pchla0').css({"backgroundColor":"green"});
+		socket.emit('pozycja');
 	});
 	
 	socket.on('gracz4', function(){
 		$('.pchla0').css({"backgroundColor":"#CD6090"});
+		socket.emit('pozycja');
 	});
 	
 	socket.on('za_duzo_graczy', function(){
@@ -220,7 +218,23 @@ socket.on('gracz1', function(){
 	$('#gamefield').append(pchly[0][7] + '<br / >');
 	pozycjaLosowa(0);
 	
+	var pozycja_pchly=pozycjaLosowa(0);
 	
+	socket.on('pozy', function(){
+		$('#gamefield').append(pchly[0][4]);
+		$('#gamefield').append(pchly[0][2]);
+		$('#gamefield').append(pchly[0][5] + '<br / >');
+
+		$('#gamefield').append(pchly[0][0]);
+		$('#gamefield').append(pchly[0][8]);
+		$('#gamefield').append(pchly[0][1] + '<br / >');
+
+		$('#gamefield').append(pchly[0][6]);
+		$('#gamefield').append(pchly[0][3]);
+		$('#gamefield').append(pchly[0][7] + '<br / >');
+		pozycjaLosowa(0);
+
+	});
 	
 	socket.on('p',function(){
 		alert('przegrales');
@@ -245,8 +259,7 @@ function pozycjaLosowa(n){
 	ustawPozycje(n,pos1,pos);
 	dX[n]=pos1;
 	dY[n]=pos;
-	pozycja1 = pos;
-	pozycja2 = pos1;
+
 }
 
 ///////////////////////////////// ustawienie na pozycji

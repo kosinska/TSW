@@ -69,12 +69,7 @@ var uzytkownicy = new Array();
 			if(i>4){
 				client.emit('za_duzo_graczy')
 			}
- 
-
-       /* client.on("wyslijpozycje", function(pos1,pos2){ 
-        	console.log("\n\n\n\n     pozycja klienta: "+pos+","+pos1 + "    \n\n\n");
-        	client.emit("loop");
-        });*/
+			
         
         console.log('ilosc uzytkownikow: '+uzytkownicy.length);
     
@@ -82,10 +77,14 @@ var uzytkownicy = new Array();
         	console.log('uzytkownik: '+uzytkownicy[i].id);
         }
 
-client.on('przegrana',function(){
-    		
+		client.on('przegrana',function(){
     		client.broadcast.emit('p');
     	});
 
+    	
+    	client.on('pozycja', function(){
+    		client.broadcast.emit('pozy');
+    	});
+    
     
     });
