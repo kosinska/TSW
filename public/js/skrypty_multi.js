@@ -6,13 +6,13 @@ var pchly=new Array(5);
 var gracze = {};
 
 ///////////////////////////////// tablica pchel
-for(i=0; i<1;i++){
+for(i=0; i<3;i++){
 	pchly[i]=new Array(9);
 }
 
 
 ///////////////////////////////// tablica pchel skladowych
-for(j=0;j<1;j++){
+for(j=0;j<3;j++){
 	for(k=0;k<9;k++){
 		if(k<2){
 			pchly[j][k]= '<div onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
@@ -61,7 +61,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 						
-				if(licznik_pkt == 1){
+				if(licznik_pkt == 3){
 					$('#gamefield').remove();
 					socket.emit('przegrana');
 					alert("Wygrales!");
@@ -90,7 +90,7 @@ function rPoz(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 1){
+				if(licznik_pkt == 3){
 					$('#gamefield').remove();
 					socket.emit('przegrana');					
 					alert("Wygrales!");
@@ -132,7 +132,7 @@ function rPion(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 					
-				if(licznik_pkt == 1){
+				if(licznik_pkt == 3){
 				$('#gamefield').remove();									           
 				    socket.emit('przegrana');
 					alert("Wygrales!");
@@ -161,7 +161,7 @@ function rPion(dir,n){
 					if(n==4)$('.pchla'+n).remove();
 					licznik_pkt++;};
 				
-				if(licznik_pkt == 1){
+				if(licznik_pkt == 3){
 				$('#gamefield').remove();
 					socket.emit('przegrana');
 					alert("Wygrales!");
@@ -196,6 +196,33 @@ $(document).ready(function () {
 	$('#gamefield').append(pchly[0][6]);
 	$('#gamefield').append(pchly[0][3]);
 	$('#gamefield').append(pchly[0][7] + '<br / >');
+	
+	$('#gamefield').append(pchly[1][4]);
+	$('#gamefield').append(pchly[1][2]);
+	$('#gamefield').append(pchly[1][5] + '<br / >');
+
+	$('#gamefield').append(pchly[1][0]);
+	$('#gamefield').append(pchly[1][8]);
+	$('#gamefield').append(pchly[1][1] + '<br / >');
+
+	$('#gamefield').append(pchly[1][6]);
+	$('#gamefield').append(pchly[1][3]);
+	$('#gamefield').append(pchly[1][7] + '<br / >');
+	
+	
+	$('#gamefield').append(pchly[2][4]);
+	$('#gamefield').append(pchly[2][2]);
+	$('#gamefield').append(pchly[2][5] + '<br / >');
+
+	$('#gamefield').append(pchly[2][0]);
+	$('#gamefield').append(pchly[2][8]);
+	$('#gamefield').append(pchly[2][1] + '<br / >');
+
+	$('#gamefield').append(pchly[2][6]);
+	$('#gamefield').append(pchly[2][3]);
+	$('#gamefield').append(pchly[2][7] + '<br / >');
+	
+	
 
     socket.on('connect', function(socket){
     });
@@ -204,10 +231,16 @@ $(document).ready(function () {
         if (my_id == undefined){
             my_id = data.id;
             var color = data.color;
-            wsp = pozycjaLosowa(0);        
+            wsp = pozycjaLosowa(0);  
+            wsp1 = pozycjaLosowa(1);    
+            wsp2 = pozycjaLosowa(2);  
             $('.pchla0').css({"backgroundColor":color});
+            $('.pchla1').css({"backgroundColor":color});
+            $('.pchla2').css({"backgroundColor":color});
             gracze[data.id]=color;
             socket.emit('pozycja_gracza', { id:my_id, x:wsp[0], y:wsp[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x:wsp1[0], y:wsp1[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x:wsp2[0], y:wsp2[1]});
         }
     });
     
@@ -225,6 +258,8 @@ $(document).ready(function () {
             console.log(gracz);
             if (gracze[id] == undefined){
                 gracze[id] = gracz.color;
+                $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
+                $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
                 $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
               $('#'+id).animate({top:gracz.y+'px'}).animate({left:gracz.x+'px'});
             }
@@ -257,6 +292,8 @@ $(document).ready(function () {
 		$('#gamefield').append(pchly[0][6]);
 		$('#gamefield').append(pchly[0][3]);
 		$('#gamefield').append(pchly[0][7] + '<br / >');
+		
+	
 	
 	for(i=0;i<9;i++){
 		$('#pchla'+n+i).animate({ top: dY + 'px'});
