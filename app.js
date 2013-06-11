@@ -49,6 +49,9 @@ socket.on('connection', function (client) {
     if (i < dostepne_kolory.length){
         var color = dostepne_kolory[i];
         uzytkownicy[client.id] = { x:0, y:0, color:color };
+       uzytkownicy[client.id] = { x:1, y:1, color:color };
+       uzytkownicy[client.id] = { x:2, y:2, color:color };
+       
        
         client.emit('witaj_graczu', { id: client.id, color: color });
         client.emit('obecni_gracze', uzytkownicy);
@@ -87,6 +90,7 @@ socket.on('connection', function (client) {
       uzytkownicy[data.id].x = data.x;
       uzytkownicy[data.id].y = data.y;
       client.broadcast.emit('nowa_pozycja', { id:data.id, x:data.x, y:data.y });
+      
       
     });
 

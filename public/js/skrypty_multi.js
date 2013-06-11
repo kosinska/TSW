@@ -105,6 +105,8 @@ function rPoz(dir,n){
 		});
 	}
     socket.emit('pozycja_gracza', {id:my_id, x:dX[0], y:dY[0]});
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[1], y:dY[1]});
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[2], y:dY[2]});
 
 }
 
@@ -178,6 +180,8 @@ function rPion(dir,n){
 		});
 	}
     socket.emit('pozycja_gracza', {id:my_id, x:dX[0], y:dY[0]});
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[1], y:dY[1]});
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[2], y:dY[2]});
 
 }
 
@@ -248,6 +252,7 @@ $(document).ready(function () {
     socket.on('nowa_pozycja', function(data) {
         console.log(data);
         $('#'+data.id).animate({top:data.y+'px'}).animate({left:data.x+'px'});
+        
     });
 
 
@@ -261,6 +266,7 @@ $(document).ready(function () {
                 gracze[id] = gracz.color;
                 $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
               $('#'+id).animate({top:gracz.y+'px'}).animate({left:gracz.x+'px'});
+             
               
             }
         }
