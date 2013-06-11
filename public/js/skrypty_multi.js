@@ -109,10 +109,10 @@ function rPoz(dir,n){
     	socket.emit('pozycja_gracza', {id:my_id, x1:dX[n], y1:dY[n]});
     	}
     	else if(n === 1){
-    		socket.emit('pozycja_gracza', {id:my_id, x:2dX[n], y2:dY[n]});
+    		socket.emit('pozycja_gracza', {id:my_id, x2:dX[n], y2:dY[n]});
     		}
     	else if(n === 2){
-    	socket.emit('pozycja_gracza', {id:my_id, x3:dX[n], y3:dY[n]});
+    		socket.emit('pozycja_gracza', {id:my_id, x3:dX[n], y3:dY[n]});
     	}
 
 }
