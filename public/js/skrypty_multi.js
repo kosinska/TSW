@@ -104,9 +104,8 @@ function rPoz(dir,n){
 		left: dX[n] + 'px'
 		});
 	}
-    socket.emit('pozycja_gracza', {id:my_id, x1:dX[n], y1:dY[n]});
-    socket.emit('pozycja_gracza', {id:my_id, x2:dX[n], y2:dY[n]});
-    socket.emit('pozycja_gracza', {id:my_id, x3:dX[n], y3:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[0], y:dY[0]});
+
 }
 
 
@@ -178,9 +177,7 @@ function rPion(dir,n){
 		top: dY[n] + 'px'
 		});
 	}
-    socket.emit('pozycja_gracza', {id:my_id, x1:dX[n], y1:dY[n]});
-    socket.emit('pozycja_gracza', {id:my_id, x2:dX[n], y2:dY[n]});
-    socket.emit('pozycja_gracza', {id:my_id, x3:dX[n], y3:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x:dX[0], y:dY[0]});
 
 }
 
@@ -242,17 +239,15 @@ $(document).ready(function () {
             $('.pchla1').css({"backgroundColor":color});
             $('.pchla2').css({"backgroundColor":color});
             gracze[data.id]=color;
-            socket.emit('pozycja_gracza', { id:my_id, x1:wsp[0], y1:wsp[1]});
-            socket.emit('pozycja_gracza', { id:my_id, x2:wsp1[0], y2:wsp1[1]});
-            socket.emit('pozycja_gracza', { id:my_id, x3:wsp2[0], y3:wsp2[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x:wsp[0], y:wsp[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x:wsp1[0], y:wsp1[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x:wsp2[0], y:wsp2[1]});
         }
     });
     
     socket.on('nowa_pozycja', function(data) {
         console.log(data);
-        $('#'+data.id).animate({top:data.y1+'px'}).animate({left:data.x1+'px'});
-        $('#'+data.id).animate({top:data.y2+'px'}).animate({left:data.x2+'px'});
-        $('#'+data.id).animate({top:data.y3+'px'}).animate({left:data.x3+'px'});
+        $('#'+data.id).animate({top:data.y+'px'}).animate({left:data.x+'px'});
     });
 
 
@@ -265,11 +260,8 @@ $(document).ready(function () {
             if (gracze[id] == undefined){
                 gracze[id] = gracz.color;
                 $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
-                $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
-                $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
-              $('#'+id).animate({top:gracz.y1+'px'}).animate({left:gracz.x1+'px'});
-              $('#'+id).animate({top:gracz.y2+'px'}).animate({left:gracz.x2+'px'});
-              $('#'+id).animate({top:gracz.y3+'px'}).animate({left:gracz.x3+'px'});
+              $('#'+id).animate({top:gracz.y+'px'}).animate({left:gracz.x+'px'});
+              
             }
         }
     });
