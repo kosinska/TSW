@@ -1,7 +1,7 @@
 var socket = io.connect();
 var my_id = undefined;
 
-var pchly=new Array(5);
+var pchly=[];
 
 var gracze = {};
 
@@ -15,9 +15,9 @@ for(i=0; i<3;i++){
 for(j=0;j<3;j++){
 	for(k=0;k<9;k++){
 		if(k<2){
-			pchly[j][k]= '<div onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
+			pchly[j][k]= '<div onmousedown="mDown()" onmouseup='+'rPoz('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else if(k<4){
-			pchly[j][k]= '<div onmouseup='+'rPion('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
+			pchly[j][k]= '<div onmousedown="mDown()" onmouseup='+'rPion('+k+','+j+')'+ ' id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else if(k<8){
 			pchly[j][k]= '<div id="pchla'+j+k+'" class="pchla'+j+'"></div>';
 		}else {
@@ -30,17 +30,47 @@ for(j=0;j<3;j++){
 
 var n;
 
-var dX=new Array();
-var dY=new Array();
+var cp;
+var ck;
+var czas;
+
+var dX=[];
+var dY=[];
 
 var licznik_pkt=0;
+
+//var element = document.getElementById('pchly');
+
+
+
+///////////////////////////////// klikniecie myszy
+function mDown(){
+    //var element = document.getElementById('pchly');
+
+for(i=0;i<9;i++){
+	element = $('#pchla'+n+i)
+ 	}
+
+    element.onmousedown = function () {
+      cp = +new Date();
+    };
+
+
+   element.onmouseup = function () {
+      ck = +new Date();
+
+      czas = ck - cp;
+    };
+
+}
 
 
 ///////////////////////////////// odklikniecie myszy z lewej/prawej
 function rPoz(dir,n){
+
 	
 		if(dir===0){
-			dX[n] += 50;
+			dX[n] += czas;
 			console.log(dX);
 	
 				if(dX[n] >= 340) dX[n] = 340;
@@ -70,7 +100,7 @@ function rPoz(dir,n){
 				
 		}
 		else if (dir===1){
-			dX[n] -= 50;
+			dX[n] -= czas;
 			console.log(dX);
 	
 				if(dX[n] < 0) dX[n] = 0;
