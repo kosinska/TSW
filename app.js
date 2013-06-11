@@ -48,7 +48,9 @@ socket.on('connection', function (client) {
 
     if (i < dostepne_kolory.length){
         var color = dostepne_kolory[i];
-        uzytkownicy[client.id] = { x:0, y:0, color:color };
+        uzytkownicy[client.id] = { x1:0, y1:0, color:color };
+        uzytkownicy[client.id] = { x2:0, y2:0, color:color };
+        uzytkownicy[client.id] = { x3:0, y3:0, color:color };
         client.emit('witaj_graczu', { id: client.id, color: color });
         client.emit('obecni_gracze', uzytkownicy);
         client.broadcast.emit('obecni_gracze', uzytkownicy);
@@ -83,9 +85,15 @@ socket.on('connection', function (client) {
         console.log('niepoprawne id:',data.id);
         return;
       }
-      uzytkownicy[data.id].x = data.x;
-      uzytkownicy[data.id].y = data.y;
-      client.broadcast.emit('nowa_pozycja', { id:data.id, x:data.x, y:data.y });
+      uzytkownicy[data.id].x1 = data.x1;
+      uzytkownicy[data.id].y1 = data.y1;
+      client.broadcast.emit('nowa_pozycja', { id:data.id, x1:data.x1, y1:data.y1 });
+      uzytkownicy[data.id].x2 = data.x2;
+      uzytkownicy[data.id].y2 = data.y2;
+      client.broadcast.emit('nowa_pozycja', { id:data.id, x2:data.x2, y2:data.y2 });
+      uzytkownicy[data.id].x3 = data.x3;
+      uzytkownicy[data.id].y3 = data.y3;
+      client.broadcast.emit('nowa_pozycja', { id:data.id, x3:data.x3, y3:data.y3 });
     });
 
 });

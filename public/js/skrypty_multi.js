@@ -104,7 +104,9 @@ function rPoz(dir,n){
 		left: dX[n] + 'px'
 		});
 	}
-    socket.emit('pozycja_gracza', {id:my_id, x:dX[n], y:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x1:dX[n], y1:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x2:dX[n], y2:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x3:dX[n], y3:dY[n]});
 }
 
 
@@ -176,7 +178,9 @@ function rPion(dir,n){
 		top: dY[n] + 'px'
 		});
 	}
-    socket.emit('pozycja_gracza', {id:my_id, x:dX[n], y:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x1:dX[n], y1:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x2:dX[n], y2:dY[n]});
+    socket.emit('pozycja_gracza', {id:my_id, x3:dX[n], y3:dY[n]});
 
 }
 
@@ -238,15 +242,17 @@ $(document).ready(function () {
             $('.pchla1').css({"backgroundColor":color});
             $('.pchla2').css({"backgroundColor":color});
             gracze[data.id]=color;
-            socket.emit('pozycja_gracza', { id:my_id, x:wsp[0], y:wsp[1]});
-            socket.emit('pozycja_gracza', { id:my_id, x:wsp1[0], y:wsp1[1]});
-            socket.emit('pozycja_gracza', { id:my_id, x:wsp2[0], y:wsp2[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x1:wsp[0], y1:wsp[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x2:wsp1[0], y2:wsp1[1]});
+            socket.emit('pozycja_gracza', { id:my_id, x3:wsp2[0], y3:wsp2[1]});
         }
     });
     
     socket.on('nowa_pozycja', function(data) {
         console.log(data);
-        $('#'+data.id).animate({top:data.y+'px'}).animate({left:data.x+'px'});
+        $('#'+data.id).animate({top:data.y1+'px'}).animate({left:data.x1+'px'});
+        $('#'+data.id).animate({top:data.y2+'px'}).animate({left:data.x2+'px'});
+        $('#'+data.id).animate({top:data.y3+'px'}).animate({left:data.x3+'px'});
     });
 
 
@@ -261,7 +267,9 @@ $(document).ready(function () {
                 $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
                 $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
                 $('#gamefield').append('<div id="'+id+'"     style="width:45px;height:45px;background-color:'+gracz.color+'"></div>');
-              $('#'+id).animate({top:gracz.y+'px'}).animate({left:gracz.x+'px'});
+              $('#'+id).animate({top:gracz.y1+'px'}).animate({left:gracz.x1+'px'});
+              $('#'+id).animate({top:gracz.y2+'px'}).animate({left:gracz.x2+'px'});
+              $('#'+id).animate({top:gracz.y3+'px'}).animate({left:gracz.x3+'px'});
             }
         }
     });
@@ -292,6 +300,31 @@ $(document).ready(function () {
 		$('#gamefield').append(pchly[0][6]);
 		$('#gamefield').append(pchly[0][3]);
 		$('#gamefield').append(pchly[0][7] + '<br / >');
+		
+		$('#gamefield').append(pchly[1][4]);
+	$('#gamefield').append(pchly[1][2]);
+	$('#gamefield').append(pchly[1][5] + '<br / >');
+
+	$('#gamefield').append(pchly[1][0]);
+	$('#gamefield').append(pchly[1][8]);
+	$('#gamefield').append(pchly[1][1] + '<br / >');
+
+	$('#gamefield').append(pchly[1][6]);
+	$('#gamefield').append(pchly[1][3]);
+	$('#gamefield').append(pchly[1][7] + '<br / >');
+	
+	
+	$('#gamefield').append(pchly[2][4]);
+	$('#gamefield').append(pchly[2][2]);
+	$('#gamefield').append(pchly[2][5] + '<br / >');
+
+	$('#gamefield').append(pchly[2][0]);
+	$('#gamefield').append(pchly[2][8]);
+	$('#gamefield').append(pchly[2][1] + '<br / >');
+
+	$('#gamefield').append(pchly[2][6]);
+	$('#gamefield').append(pchly[2][3]);
+	$('#gamefield').append(pchly[2][7] + '<br / >');
 		
 	
 	
