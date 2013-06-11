@@ -39,28 +39,22 @@ var dY=[];
 
 var licznik_pkt=0;
 
-//var element = document.getElementById('pchly');
-
-
 
 ///////////////////////////////// klikniecie myszy
 function mDown(){
+
     //var element = document.getElementById('pchly');
 
-for(i=0;i<9;i++){
-	element = $('#pchla'+n+i)
- 	}
-
-    element.onmousedown = function () {
+    //element.onmousedown = function () {
       cp = +new Date();
-    };
+    //};
 
 
-   element.onmouseup = function () {
-      ck = +new Date();
+   //element.onmouseup = function () {
+      //ck = +new Date();
 
-      czas = ck - cp;
-    };
+     // czas = ck - cp;
+    //};
 
 }
 
@@ -68,6 +62,8 @@ for(i=0;i<9;i++){
 ///////////////////////////////// odklikniecie myszy z lewej/prawej
 function rPoz(dir,n){
 
+ck = +new Date();
+czas = ck - cp;
 	
 		if(dir===0){
 			dX[n] += czas;
@@ -151,8 +147,11 @@ function rPoz(dir,n){
 ///////////////////////////////// odklikniecie myszy z gory/dolu
 function rPion(dir,n){
 
+ck = +new Date();
+czas = ck - cp;
+
 		if(dir===2){
-			dY[n] += 50;
+			dY[n] += czas;
 	//socket.emit('pozycja_gracza', socket.id, dX[n], dY[n]);
 				if(dY[n] >= 340) dY[n] = 340;
 				
@@ -181,7 +180,7 @@ function rPion(dir,n){
 				
 		}
 		else if (dir===3){
-			dY[n] -= 50;
+			dY[n] -= czas;
 	//socket.emit('pozycja_gracza', socekt.id, dX[n], dY[n]);
 				if(dY[n] < 0) dY[n] = 0;
 				
